@@ -12,19 +12,7 @@ TODO
 
 TODO
 
-### Linux
-
-#### Ubuntu
-
-Run the following to install dependencies:
-
-```
-sudo apt-get update -y && sudo apt-get upgrade -y
-sudo apt-get install -y curl git unzip xz-utils zip libglu1-mesa
-# TODO install Android Studio
-```
-
-#### Fedora
+### Fedora Linux
 
 Run the following to install dependencies:
 
@@ -35,8 +23,6 @@ flatpak install com.google.AndroidStudio -y
 ```
 
 Answer `2` when prompted by Flatpak.
-
-#### Linux Continued
 
 Make sure you are running the latest version VS Code or Codium, and install the [Flutter extension](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter).
 
