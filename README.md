@@ -16,6 +16,77 @@ TODO
 
 ### Mac
 
+
+Some Flutter components require the Rosetta 2 translation process on Macs running Apple silicon. To run all Flutter components on Apple silicon, install Rosetta 2.
+
+Run to install Rosetta 2.
+
+```
+sudo softwareupdate --install-rosetta --agree-to-license
+```
+
+Additionally verify that you have Visual Studio Code version 1.77 or later and have downloaded the flutter extension in VS Code. (Installing flutter with VS Code is simpler and this is highly recommended)
+
+Launch VS Code, open the Command Palette, press Command + Shift + P. In the Command Palette, type flutter. Select Flutter: New Project. Then VS Code prompts you to locate the Flutter SDK on your computer. If you have the Flutter SDK installed, click Locate SDK. If you do not have the Flutter SDK installed, click Download SDK. When prompted Which Flutter template?, ignore it. Press Esc. You can create a test project after checking your development setup.
+
+When the Select Folder for Flutter SDK dialog displays, choose where you want to install Flutter. VS Code places you in your user profile to start. Choose a different location. Consider ~/development/
+Click Clone Flutter.
+While downloading Flutter, VS Code displays this pop-up notification:
+
+```
+Downloading the Flutter SDK. This may take a few minutes.
+content_copy
+This download takes a few minutes. If you suspect that the download has hung, click Cancel then start the installation again.
+```
+
+Once it finishes downloading Flutter, the Output panel displays.
+
+```
+Checking Dart SDK version...
+Downloading Dart SDK from the Flutter engine ...
+Expanding downloaded archive...
+```
+When successful, VS Code displays this pop-up notification:
+```
+Initializing the Flutter SDK. This may take a few minutes.
+content_copy
+```
+
+While initializing, the Output panel displays the following:
+
+```
+Building flutter tool...
+Running pub upgrade...
+Resolving dependencies...
+Got dependencies.
+Downloading Material fonts...
+Downloading Gradle Wrapper...
+Downloading package sky_engine...
+Downloading flutter_patched_sdk tools...
+Downloading flutter_patched_sdk_product tools...
+Downloading windows-x64 tools...
+Downloading windows-x64/font-subset tools...
+content_copy
+```
+This process also runs flutter doctor -v. At this point in the procedure, ignore this output. Flutter Doctor might show errors that don't apply to this quick start.
+
+When the Flutter install succeeds, VS Code displays this pop-up notification:
+```
+Do you want to add the Flutter SDK to PATH so it's accessible
+in external terminals?
+content_copy
+VS Code may display a Google Analytics notice.
+```
+If you agree, click OK. Then to enable flutter in all Terminal windows:
+Close, then reopen all Terminal windows and restart VS Code
+
+Add Flutter to your PATH by editing the shell config file (e.g., ~/.zshrc, ~/.bashrc, or ~/.bash_profile). Add:
+
+```
+export PATH="$PATH:<flutter_directory>/bin"
+```
+Configure IOS Development
+
 TODO
 
 ### Fedora Linux
