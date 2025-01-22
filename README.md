@@ -4,6 +4,8 @@ This is a microbakery app for CSC 4610.
 
 ## User Stories
 
+TEMPLATE: As a _____, I want to be able to _______, so that _____________.
+
 As a business owner, I want to be able to keep track of my inventory, so that it is easier to decide what raw materials I need to buy. 
 
 ## Environment Setup
