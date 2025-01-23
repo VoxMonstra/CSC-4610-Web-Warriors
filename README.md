@@ -27,10 +27,10 @@ sudo softwareupdate --install-rosetta --agree-to-license
 
 Additionally verify that you have Visual Studio Code version 1.77 or later and have downloaded the flutter extension in VS Code. (Installing flutter with VS Code is simpler and this is highly recommended)
 
-Launch VS Code, open the Command Palette, press Command + Shift + P. In the Command Palette, type flutter. Select Flutter: New Project. Then VS Code prompts you to locate the Flutter SDK on your computer. If you have the Flutter SDK installed, click Locate SDK. If you do not have the Flutter SDK installed, click Download SDK. When prompted Which Flutter template?, ignore it. Press Esc. You can create a test project after checking your development setup.
+Launch VS Code, open the Command Palette, press `Command + Shift + P`. In the Command Palette, type flutter. Select Flutter: New Project. Then VS Code prompts you to locate the Flutter SDK on your computer. If you have the Flutter SDK installed, click Locate SDK. If you do not have the Flutter SDK installed, click Download SDK. When prompted Which Flutter template?, ignore it. Press `Esc`. You can create a test project after checking your development setup.
 
 When the Select Folder for Flutter SDK dialog displays, choose where you want to install Flutter. VS Code places you in your user profile to start. Choose a different location. Consider ~/development/
-Click Clone Flutter.
+Click `Clone Flutter`.
 While downloading Flutter, VS Code displays this pop-up notification:
 
 ```
@@ -68,7 +68,7 @@ Downloading windows-x64 tools...
 Downloading windows-x64/font-subset tools...
 content_copy
 ```
-This process also runs flutter doctor -v. At this point in the procedure, ignore this output. Flutter Doctor might show errors that don't apply to this quick start.
+This process also runs `flutter doctor -v`. At this point in the procedure, ignore this output. Flutter Doctor might show errors that don't apply to this quick start.
 
 When the Flutter install succeeds, VS Code displays this pop-up notification:
 ```
@@ -77,7 +77,7 @@ in external terminals?
 content_copy
 VS Code may display a Google Analytics notice.
 ```
-If you agree, click OK. Then to enable flutter in all Terminal windows:
+If you agree, click `OK`. Then to enable flutter in all Terminal windows:
 Close, then reopen all Terminal windows and restart VS Code
 
 Add Flutter to your PATH by editing the shell config file (e.g., ~/.zshrc, ~/.bashrc, or ~/.bash_profile). Add:
