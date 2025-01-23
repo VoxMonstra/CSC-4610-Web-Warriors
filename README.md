@@ -1,6 +1,6 @@
-# CSC 4610 Web Warriors: Microbakery
-
-This is a microbakery app for CSC 4610.
+<p align=center><img src="https://github.com/user-attachments/assets/44e8d1a0-fafc-4ab4-a2e9-97c38a091511" width="256"></p>
+<h3 align=center>Simple Bakery (Mobile)</h3>
+<p align=center>A Microbakery Management Platform</p>
 
 ## User Stories
 
