@@ -126,3 +126,13 @@ flutter config --android-studio-dir=/home/USERNAME/.local/share/flatpak/app/com.
 ```
 
 Now, running `flutter doctor` should pass all tests except for the test that determines what version Android Studio is. This is fine because Android Studio for Fedora is sandboxed in a Flatpak.
+
+## Creating a Project
+
+
+After flutter is installed, run the following create the basic framework of the app. This will create a file with the name specified, and this will contain everything you need to run an app. 
+
+```
+flutter create <name>
+```
+In order to run the app, you will have to be in the Microbakery directory, and run `flutter run`. It will ask how you want to emulate the app. 
