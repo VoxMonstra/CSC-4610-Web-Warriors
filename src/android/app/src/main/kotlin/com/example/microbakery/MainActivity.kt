@@ -1,4 +1,4 @@
-package com.example.microbakery
+package com.example.src
 
 import io.flutter.embedding.android.FlutterActivity
 
