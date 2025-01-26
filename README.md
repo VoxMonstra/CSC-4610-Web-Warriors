@@ -95,7 +95,7 @@ Run the following to install dependencies:
 
 ```
 sudo dnf upgrade -y
-sudo dnf install curl git unzip xz zip mesa-libGLU
+sudo dnf install curl git unzip xz zip mesa-libGLU ninja gtk3-devel cmake
 flatpak install com.google.AndroidStudio -y
 ```
 
