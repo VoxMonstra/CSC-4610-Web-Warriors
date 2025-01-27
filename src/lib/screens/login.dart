@@ -42,7 +42,9 @@ class _LoginState extends State<Login> {
             ),
             const SizedBox(height: 10),
             TextFormField(
-                decoration: const InputDecoration(labelText: 'Password')),
+                decoration: const InputDecoration(labelText: 'Password'),
+                obscureText: true,
+                ),
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
