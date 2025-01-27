@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,6 +33,12 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      // Uncomment `home: const Login(),` to test login page
+      // A better practice would probably be to have the home actually be the
+      // main page, and check if the user is logged in
+      //   - if false, prompt login/register
+      //   - if true,  stay at main page
+      // home: const Login(),
     );
   }
 }
