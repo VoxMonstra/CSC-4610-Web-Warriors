@@ -34,10 +34,6 @@ class _LoginState extends State<Login> {
           children: [
             const SizedBox(height: 20),
             TextFormField(
-              decoration: const InputDecoration(labelText: 'Username'),
-            ),
-            const SizedBox(height: 10),
-            TextFormField(
               decoration: const InputDecoration(labelText: 'Email'),
             ),
             const SizedBox(height: 10),
