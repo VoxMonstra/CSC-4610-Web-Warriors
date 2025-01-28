@@ -15,6 +15,14 @@ class _LoginState extends State<Login> {
     return Scaffold(
       body: Stack(
         children: [
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/gpt-generated-branding.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
           Center(
             child: Container(
               padding: const EdgeInsets.all(20),
