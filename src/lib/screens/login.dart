@@ -48,7 +48,13 @@ class _LoginState extends State<Login> {
                   context,
                   MaterialPageRoute(builder: (context) => DashboardPage()),
                 );
-              },
+              },  
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFFDC8515),
+                foregroundColor: Colors.white,
+                shadowColor: Color(0xFF343330),
+                elevation: 5,
+              ),
               child: const Text('Login'),
             ),
             const SizedBox(height: 10),
@@ -59,6 +65,12 @@ class _LoginState extends State<Login> {
                   MaterialPageRoute(builder: (context) => RegisterPage()),
                 );
               },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFFDC8515),
+                foregroundColor: Colors.white,
+                shadowColor: Color(0xFF343330),
+                elevation: 5,
+              ),
               child: const Text('Register'),
             ),
           ],
