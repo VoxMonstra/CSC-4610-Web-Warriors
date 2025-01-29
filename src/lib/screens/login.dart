@@ -50,14 +50,12 @@ class _LoginState extends State<Login> {
                       TextFormField(
                         decoration:
                             const InputDecoration(labelText: 'First Name'),
-                        obscureText: true,
                       ),
                     if (!userHasAccount) const SizedBox(height: 10),
                     if (!userHasAccount)
                       TextFormField(
                         decoration:
                             const InputDecoration(labelText: 'Last Name'),
-                        obscureText: true,
                       ),
                     const SizedBox(height: 10),
                     TextFormField(
