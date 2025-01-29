@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'dashboard.dart';
+import 'home.dart';
+import '../widgets/drawer.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -16,6 +17,8 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text('Welcome')),
+      drawer: AppDrawer(),
       body: Stack(
         children: [
           Container(

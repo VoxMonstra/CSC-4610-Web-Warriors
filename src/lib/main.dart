@@ -9,6 +9,8 @@ class MyApp extends StatelessWidget {
   // Constructor
   const MyApp({super.key});
 
+  static const appTitle = 'Simple Bakery';
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
