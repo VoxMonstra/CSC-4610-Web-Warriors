@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'dashboard.dart';
 import 'register.dart';
@@ -64,12 +65,15 @@ class _LoginState extends State<Login> {
                         backgroundColor: Color(0xFFDC8515),
                         foregroundColor: Colors.white,
                         shadowColor: Color(0xFF343330),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6.0),
+                        ),
                         elevation: 5,
                       ),
                       child: const Text('Login'),
                     ),
                     const SizedBox(height: 10),
-                    ElevatedButton(
+                    TextButton(
                       onPressed: () {
                         Navigator.push(
                           context,
@@ -77,13 +81,10 @@ class _LoginState extends State<Login> {
                               builder: (context) => RegisterPage()),
                         );
                       },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFFDC8515),
-                        foregroundColor: Colors.white,
-                        shadowColor: Color(0xFF343330),
+                      style: TextButton.styleFrom(
                         elevation: 5,
                       ),
-                      child: const Text('Register'),
+                      child: const Text('Create account'),
                     ),
                   ],
                 ),
