@@ -11,6 +11,9 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  // Preston: determines whether the app will show the 'login' screen or 'register' form
+  bool userHasAccount = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,10 +30,10 @@ class _LoginState extends State<Login> {
           Center(
             child: Container(
               padding: const EdgeInsets.all(20),
-              margin: const EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 600),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(15),
+                borderRadius: BorderRadius.circular(6),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black,
@@ -43,7 +46,21 @@ class _LoginState extends State<Login> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 10),
+                    if (!userHasAccount)
+                      TextFormField(
+                        decoration:
+                            const InputDecoration(labelText: 'First Name'),
+                        obscureText: true,
+                      ),
+                    const SizedBox(height: 10),
+                    if (!userHasAccount)
+                      TextFormField(
+                        decoration:
+                            const InputDecoration(labelText: 'Last Name'),
+                        obscureText: true,
+                      ),
+                    const SizedBox(height: 10),
                     TextFormField(
                       decoration: const InputDecoration(labelText: 'Email'),
                     ),
@@ -53,6 +70,12 @@ class _LoginState extends State<Login> {
                       obscureText: true,
                     ),
                     const SizedBox(height: 10),
+                    if (!userHasAccount)
+                      TextFormField(
+                        decoration: const InputDecoration(
+                            labelText: 'Confirm Password'),
+                        obscureText: true,
+                      ),
                     ElevatedButton(
                       onPressed: () {
                         Navigator.push(
@@ -70,21 +93,21 @@ class _LoginState extends State<Login> {
                         ),
                         elevation: 5,
                       ),
-                      child: const Text('Login'),
+                      child: Text(userHasAccount ? 'Login' : 'Register'),
                     ),
                     const SizedBox(height: 10),
                     TextButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => RegisterPage()),
-                        );
+                        setState(() {
+                          userHasAccount = !userHasAccount; // Toggle mode
+                        });
                       },
                       style: TextButton.styleFrom(
                         elevation: 5,
                       ),
-                      child: const Text('Create account'),
+                      child: Text(userHasAccount
+                          ? "Create a new account"
+                          : "Sign in with account"),
                     ),
                   ],
                 ),
