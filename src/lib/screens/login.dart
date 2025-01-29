@@ -33,7 +33,7 @@ class _LoginState extends State<Login> {
               margin: const EdgeInsets.symmetric(horizontal: 600),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(6),
+                borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black,
@@ -46,14 +46,14 @@ class _LoginState extends State<Login> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const SizedBox(height: 10),
+                    if (!userHasAccount) const SizedBox(height: 10),
                     if (!userHasAccount)
                       TextFormField(
                         decoration:
                             const InputDecoration(labelText: 'First Name'),
                         obscureText: true,
                       ),
-                    const SizedBox(height: 10),
+                    if (!userHasAccount) const SizedBox(height: 10),
                     if (!userHasAccount)
                       TextFormField(
                         decoration:
@@ -69,13 +69,14 @@ class _LoginState extends State<Login> {
                       decoration: const InputDecoration(labelText: 'Password'),
                       obscureText: true,
                     ),
-                    const SizedBox(height: 10),
+                    if (!userHasAccount) const SizedBox(height: 10),
                     if (!userHasAccount)
                       TextFormField(
                         decoration: const InputDecoration(
                             labelText: 'Confirm Password'),
                         obscureText: true,
                       ),
+                    const SizedBox(height: 10),
                     ElevatedButton(
                       onPressed: () {
                         Navigator.push(
