@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import '../widgets/drawer.dart';
 
-class DashboardPage extends StatelessWidget {
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Dashboard')),
+      appBar: AppBar(title: Text('Home')),
       drawer: AppDrawer(),
       body: const Center(
-        child: Text('Welcome to the Dashboard!'),
+        child: Text('Welcome to Simple Bakery!'),
       ),
     );
   }
