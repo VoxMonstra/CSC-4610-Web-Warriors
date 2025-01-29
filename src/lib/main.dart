@@ -6,6 +6,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  // Constructor
   const MyApp({super.key});
 
   // This widget is the root of your application.
@@ -17,10 +18,10 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      initialRoute: '/login', 
+      initialRoute: '/login',
       routes: {
         '/login': (context) => Login(),
-      },//Starting Route
+      }, //Starting Route
     );
   }
 }
