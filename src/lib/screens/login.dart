@@ -32,7 +32,7 @@ class _LoginState extends State<Login> {
           Center(
             child: Container(
               padding: const EdgeInsets.all(20),
-              margin: const EdgeInsets.symmetric(horizontal: 600),
+              margin: const EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(12),
