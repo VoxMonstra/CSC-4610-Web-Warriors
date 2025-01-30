@@ -107,7 +107,7 @@ class _LoginState extends State<Login> {
                       ),
                       child: Text(userHasAccount
                           ? "Create a new account"
-                          : "Sign in with account"),
+                          : "Sign in with existing account"),
                     ),
                   ],
                 ),
