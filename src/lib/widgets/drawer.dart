@@ -36,7 +36,7 @@ class AppDrawer extends StatelessWidget {
           if (currPage.data != "login")
             ListTile(
               leading: Icon(Icons.logout),
-              title: Text('Logout'),
+              title: Text('Login'),
               onTap: () {
                 Navigator.pushNamed(context, '/login');
               },
