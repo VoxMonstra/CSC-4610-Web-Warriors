@@ -42,6 +42,7 @@ app.*.map.json
 # XCode related
 
 *.xcuserdata/
+*.xcuserstate
 
 # Android Studio will place build artifacts here
 /android/app/debug
