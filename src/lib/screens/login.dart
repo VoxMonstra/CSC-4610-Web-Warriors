@@ -17,7 +17,8 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Welcome')),
+      appBar: AppBar(title: Text('Welcome'),
+      ),
       drawer: AppDrawer(currPage: Text('login')),
       body: Stack(
         children: [

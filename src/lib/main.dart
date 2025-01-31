@@ -19,6 +19,10 @@ class MyApp extends StatelessWidget {
       title: 'Simple Bakery',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        appBarTheme: AppBarTheme( //Devan: Makes a common theme for all of the appbars on every screen
+          backgroundColor: Color(0xFF5f967c),
+          titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
+        ),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
