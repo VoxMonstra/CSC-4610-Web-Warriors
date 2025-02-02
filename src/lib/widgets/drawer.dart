@@ -41,6 +41,14 @@ class AppDrawer extends StatelessWidget {
                 Navigator.pushNamed(context, '/login');
               },
             ),
+          if (currPage.data != "about")
+            ListTile(
+              leading: Icon(Icons.info),
+              title: Text('About'),
+              onTap: () {
+                Navigator.pushNamed(context, '/about');
+              },
+            ),
         ],
       ),
     );
