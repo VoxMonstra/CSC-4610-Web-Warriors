@@ -109,20 +109,21 @@ Press `Ctrl+Shift+P` and select "Flutter: New Project." Install SDK to `~/Bin/` 
 export PATH=/home/USERNAME/Bin/flutter/bin/:$PATH
 ```
 
-Open Android Studio and proceed through the initial setup, agreeing to all prompts and installing the SDK.
+Open Android Studio and proceed through the initial setup, agreeing to all prompts and installing the SDK to `~/Bin/Android`.
 
 Create an empty project, and open settings. Search `sdk` and select "Android SDK." Under SDK Tools, check the Android SDK Command-line Tools box. Apply and exit to begin downloading.
 
-Exit Android Studio and run the following, entering `y` to all license agreements:
+Exit Android Studio and run the following to set the Android Studio install location to the Flatpak path, changing the username to your username:
+
+```
+flutter config --android-studio-dir=/var/lib/flatpak/app/com.google.AndroidStudio/current/active/files/extra/android-studio
+flutter config --android-sdk /home/USERNAME/Bin/Android/
+```
+
+Run the following, entering `y` to all license agreements:
 
 ```
 flutter doctor --android-licenses
-```
-
-Run the following to set the Android Studio install location to the Flatpak path, changing the username to your username:
-
-```
-flutter config --android-studio-dir=/home/USERNAME/.local/share/flatpak/app/com.google.AndroidStudio/current/active/files/extra/android-studio
 ```
 
 Now, running `flutter doctor` should pass all tests except for the test that determines what version Android Studio is. This is fine because Android Studio for Fedora is sandboxed in a Flatpak.
