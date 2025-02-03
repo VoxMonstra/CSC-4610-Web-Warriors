@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class SettingsScreen extends StatefulWidget {
+  final Function(ThemeMode) onThemeChanged;
+
+  const SettingsScreen({Key? key, required this.onThemeChanged}) : super(key: key);
+
   @override
   _SettingsScreenState createState() => _SettingsScreenState();
 }
@@ -13,6 +17,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     setState(() {
       _themeMode = mode;
     });
+
+    widget.onThemeChanged(mode); // ✅ Call function to update global theme
   }
 
   @override
@@ -32,11 +38,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           ListTile(
             title: const Text('Theme'),
-            subtitle: Text(_themeMode == ThemeMode.light
-                ? 'Light'
-                : _themeMode == ThemeMode.dark
-                    ? 'Dark'
-                    : 'System Default'),
+            subtitle: Text(
+              _themeMode == ThemeMode.light
+                  ? 'Light'
+                  : _themeMode == ThemeMode.dark
+                      ? 'Dark'
+                      : 'System Default',
+            ),
             onTap: () {
               showModalBottomSheet(
                 context: context,
@@ -47,21 +55,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ListTile(
                         title: const Text('Light Mode'),
                         onTap: () {
-                          _changeTheme(ThemeMode.light);
+                          _changeTheme(ThemeMode.light); // ✅ Apply change globally
                           Navigator.pop(context);
                         },
                       ),
                       ListTile(
                         title: const Text('Dark Mode'),
                         onTap: () {
-                          _changeTheme(ThemeMode.dark);
+                          _changeTheme(ThemeMode.dark); // ✅ Apply change globally
                           Navigator.pop(context);
                         },
                       ),
                       ListTile(
                         title: const Text('System Default'),
                         onTap: () {
-                          _changeTheme(ThemeMode.system);
+                          _changeTheme(ThemeMode.system); // ✅ Apply change globally
                           Navigator.pop(context);
                         },
                       ),

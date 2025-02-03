@@ -1,41 +1,72 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'screens/settings.dart';
 import 'screens/login.dart';
 import './screens/home.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  ThemeMode themeMode = await _loadTheme();
+  runApp(MyApp(initialThemeMode: themeMode));
 }
 
-class MyApp extends StatelessWidget {
-  // Constructor
-  const MyApp({super.key});
+Future<ThemeMode> _loadTheme() async {
+  final prefs = await SharedPreferences.getInstance();
+  int themeIndex = prefs.getInt('themeMode') ?? 2; // Default to System theme
+  return ThemeMode.values[themeIndex];
+}
 
-  static const appTitle = 'Simple Bakery';
+class MyApp extends StatefulWidget {
+  final ThemeMode initialThemeMode;
 
-  // This widget is the root of your application.
+  const MyApp({super.key, required this.initialThemeMode});
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  late ThemeMode _themeMode;
+
+  @override
+  void initState() {
+    super.initState();
+    _themeMode = widget.initialThemeMode;
+  }
+
+ void _updateTheme(ThemeMode mode) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('themeMode', mode.index);
+    setState(() {
+      _themeMode = mode;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Simple Bakery',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        appBarTheme: AppBarTheme( //Devan: Makes a common theme for all of the appbars on every screen
+        appBarTheme: const AppBarTheme(
           backgroundColor: Color(0xFF5f967c),
           titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
         ),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
+      darkTheme: ThemeData.dark(),
+      themeMode: _themeMode, // Dynamic theme selection
       initialRoute: '/home',
       routes: {
         '/login': (context) => Login(),
         '/home': (context) => HomePage(),
-        '/settings': (context) => SettingsScreen(),
-      }, //Starting Route
+        '/settings': (context) => SettingsScreen(onThemeChanged: _updateTheme),
+      },
     );
   }
 }
+
 
 // class MyHomePage extends StatefulWidget {
 //   const MyHomePage({super.key, required this.title});
