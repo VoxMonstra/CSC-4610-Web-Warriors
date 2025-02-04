@@ -162,8 +162,8 @@ class _InventoryPageState extends State<InventoryPage> {
                       Text('Supplier', style: TextStyle(color: Colors.white))),
             if (showColumn7)
               DataColumn(
-                  label: Text('Expiry Date',
-                      style: TextStyle(color: Colors.white))),
+                  label:
+                      Text('Acquired', style: TextStyle(color: Colors.white))),
           ],
           rows: inventory.asMap().entries.map((entry) {
             int index = entry.key;
