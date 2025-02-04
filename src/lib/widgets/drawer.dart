@@ -28,6 +28,15 @@ class AppDrawer extends StatelessWidget {
               },
             ),
 
+            if (currPage.data != "menu")
+            ListTile(
+              leading: Icon(Icons.receipt),
+              title: Text('Order'),
+              onTap: () {
+                Navigator.pushNamed(context, '/menu');
+              },
+            ),
+
           // Settings button
           if (currPage.data != "settings")
             ListTile(

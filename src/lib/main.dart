@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'screens/settings.dart';
 import 'screens/login.dart';
 import './screens/home.dart';
 import './screens/inventory.dart';
 import './screens/about.dart';
+import './screens/menu.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -66,6 +68,7 @@ class _MyAppState extends State<MyApp> {
         '/settings': (context) => SettingsScreen(onThemeChanged: _updateTheme),
         '/inventory': (context) => InventoryPage(),
         '/about': (context) => AboutPage(),
+        '/menu': (context) => BakeryShop(),
       },
     );
   }
