@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/drawer.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AboutPage extends StatelessWidget {
@@ -12,6 +13,7 @@ class AboutPage extends StatelessWidget {
         ),
         backgroundColor: Colors.brown,
       ),
+      drawer: AppDrawer(currPage: Text("about")),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
         child: Column(
