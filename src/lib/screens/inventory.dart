@@ -73,7 +73,7 @@ class _InventoryPageState extends State<InventoryPage> {
     setState(() {
       for (var item in inventory) {
         if (item["orderQty"] > 0) {
-          item["quantity"] -= item["orderQty"];
+          item["quantity"] += item["orderQty"];
           item["orderQty"] = 0;
         }
       }
