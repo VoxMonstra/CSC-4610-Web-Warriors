@@ -11,7 +11,10 @@ import './screens/menu.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   ThemeMode themeMode = await _loadTheme();
-  runApp(MyApp(initialThemeMode: themeMode));
+  runApp(ChangeNotifierProvider(
+      create: (context) => CartProvider(), // Initializes CartProvider globally
+      child: MyApp(initialThemeMode: themeMode),
+    ),);
 }
 
 Future<ThemeMode> _loadTheme() async {
