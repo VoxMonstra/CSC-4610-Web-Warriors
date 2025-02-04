@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:src/widgets/drawer.dart';
 
 class InventoryPage extends StatefulWidget {
   const InventoryPage({super.key});
@@ -68,6 +69,7 @@ class _InventoryPageState extends State<InventoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Inventory')),
+      drawer: AppDrawer(currPage: Text("inventory")),
       body: Column(
         children: [
           Expanded(
