@@ -9,11 +9,24 @@ class InventoryPage extends StatefulWidget {
 }
 
 class _InventoryPageState extends State<InventoryPage> {
-  final List<Map<String, dynamic>> inventory = [
-    {"name": "Bread", "quantity": 20, "icon": Icons.bakery_dining, "orderQty": 0},
-    {"name": "Croissants", "quantity": 15, "icon": Icons.bakery_dining, "orderQty": 0},
-    {"name": "Muffins", "quantity": 10, "icon": Icons.cake, "orderQty": 0},
-    {"name": "Cookies", "quantity": 30, "icon": Icons.cookie, "orderQty": 0},
+  final List<Map<String, dynamic>> inventory = [  //{"name": "", "quantity": 20, "icon": Icons.abc, "orderQty": 0},
+    {"name": "All-purpose Flour", "quantity": 20, "icon": Icons.bakery_dining, "orderQty": 0},
+    {"name": "Bread Flour", "quantity": 20, "icon": Icons.bakery_dining, "orderQty": 0},
+    {"name": "Whole-Wheat Flour", "quantity": 20, "icon": Icons.bakery_dining, "orderQty": 0},
+    {"name": "Cake Flour", "quantity": 20, "icon": Icons.bakery_dining, "orderQty": 0},
+    {"name": "Rye Flour", "quantity": 20, "icon": Icons.bakery_dining, "orderQty": 0},
+    {"name": "Cornmeal", "quantity": 20, "icon": Icons.bakery_dining, "orderQty": 0},
+    {"name": "Oats", "quantity": 20, "icon": Icons.bakery_dining, "orderQty": 0},
+    {"name": "Granulated Sugar", "quantity": 15, "icon": Icons.icecream, "orderQty": 0},
+    {"name": "Brown Sugar", "quantity": 20, "icon": Icons.icecream, "orderQty": 0},
+    {"name": "Powdered Sugar", "quantity": 20, "icon": Icons.icecream, "orderQty": 0},
+    {"name": "Honey", "quantity": 20, "icon": Icons.hive, "orderQty": 0},
+    {"name": "Maple Syrup", "quantity": 20, "icon": Icons.breakfast_dining, "orderQty": 0},
+    {"name": "Molasses", "quantity": 20, "icon": Icons.breakfast_dining_outlined, "orderQty": 0},
+    {"name": "Yeast", "quantity": 20, "icon": Icons.bakery_dining, "orderQty": 0},
+    {"name": "Butter", "quantity": 10, "icon": Icons.breakfast_dining, "orderQty": 0},
+    {"name": "Milk", "quantity": 30, "icon": Icons.coffee, "orderQty": 0},
+    {"name": "", "quantity": 20, "icon": Icons.abc, "orderQty": 0},
   ];
 
   void _incrementOrder(int index) {
