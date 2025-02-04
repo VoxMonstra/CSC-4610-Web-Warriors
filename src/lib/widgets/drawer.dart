@@ -17,14 +17,18 @@ class AppDrawer extends StatelessWidget {
               style: TextStyle(color: Colors.white, fontSize: 24),
             ),
           ),
+
+          // Home button
           if (currPage.data != "home")
             ListTile(
               leading: Icon(Icons.home),
               title: Text('Home'),
               onTap: () {
-                Navigator.pushNamed(context, '/home'); // Change route if needed
+                Navigator.pushNamed(context, '/home');
               },
             ),
+
+          // Settings button
           if (currPage.data != "settings")
             ListTile(
               leading: Icon(Icons.settings),
@@ -33,6 +37,8 @@ class AppDrawer extends StatelessWidget {
                 Navigator.pushNamed(context, '/settings');
               },
             ),
+
+          // Login button
           if (currPage.data != "login")
             ListTile(
               leading: Icon(Icons.logout),
