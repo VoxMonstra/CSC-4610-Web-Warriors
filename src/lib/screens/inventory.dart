@@ -137,70 +137,89 @@ class _InventoryPageState extends State<InventoryPage> {
         title: Text('Inventory'),
         backgroundColor: Colors.brown,
       ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: DataTable(
-          headingRowColor: WidgetStateProperty.all(
-              Colors.brown[400]), // Lighter brown header
-          columns: [
-            DataColumn(
-                label:
-                    Text('Item Name', style: TextStyle(color: Colors.white))),
-            DataColumn(
-                label: Text('Qty', style: TextStyle(color: Colors.white))),
-            DataColumn(
-                label: Text('Unit', style: TextStyle(color: Colors.white))),
-            DataColumn(
-                label: Text('Category', style: TextStyle(color: Colors.white))),
-            if (showColumn5)
-              DataColumn(
-                  label: Text('Price/Unit',
-                      style: TextStyle(color: Colors.white))),
-            if (showColumn6)
-              DataColumn(
-                  label:
-                      Text('Supplier', style: TextStyle(color: Colors.white))),
-            if (showColumn7)
-              DataColumn(
-                  label:
-                      Text('Acquired', style: TextStyle(color: Colors.white))),
-          ],
-          rows: inventory.asMap().entries.map((entry) {
-            int index = entry.key;
-            Map<String, dynamic> item = entry.value;
-
-            return DataRow(
-              cells: [
-                DataCell(
-                  Container(
-                    child: Text(item["name"]),
-                  ),
-                  onTap: () => showItemDialog(item: item, index: index),
-                ),
-                DataCell(
-                  Container(
-                    child: Text(item["quantity"].toString()),
-                  ),
-                  onTap: () => showItemDialog(item: item, index: index),
-                ),
-                DataCell(Text(item["unit"]),
-                    onTap: () => showItemDialog(item: item, index: index)),
-                DataCell(Text(item["category"]),
-                    onTap: () => showItemDialog(item: item, index: index)),
-                if (showColumn5)
-                  DataCell(Text("\$${item["price"]}"),
-                      onTap: () => showItemDialog(item: item, index: index)),
-                if (showColumn6)
-                  DataCell(Text(item["supplier"]),
-                      onTap: () => showItemDialog(item: item, index: index)),
-                if (showColumn7)
-                  DataCell(Text(item["expiry"]),
-                      onTap: () => showItemDialog(item: item, index: index)),
-              ],
-            );
-          }).toList(),
+      body: Stack(children: [
+        Container(
+          width: MediaQuery.of(context).size.width, // Full screen width
+          height: 56, // Approximate height of DataTable header row
+          decoration: BoxDecoration(
+            color: Colors.brown[400], // Extends header color
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black
+                    .withOpacity(0.3), // Match DataTable shadow effect
+                blurRadius: 4,
+                offset: Offset(0, 2), // Shadow direction downwards
+              ),
+            ],
+          ),
         ),
-      ),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: DataTable(
+            headingRowColor: WidgetStateProperty.all(
+                Colors.transparent), // Removes cutoff issue
+
+            columns: [
+              DataColumn(
+                  label:
+                      Text('Item Name', style: TextStyle(color: Colors.white))),
+              DataColumn(
+                  label: Text('Qty', style: TextStyle(color: Colors.white))),
+              DataColumn(
+                  label: Text('Unit', style: TextStyle(color: Colors.white))),
+              DataColumn(
+                  label:
+                      Text('Category', style: TextStyle(color: Colors.white))),
+              if (showColumn5)
+                DataColumn(
+                    label: Text('Price/Unit',
+                        style: TextStyle(color: Colors.white))),
+              if (showColumn6)
+                DataColumn(
+                    label: Text('Supplier',
+                        style: TextStyle(color: Colors.white))),
+              if (showColumn7)
+                DataColumn(
+                    label: Text('Acquired',
+                        style: TextStyle(color: Colors.white))),
+            ],
+            rows: inventory.asMap().entries.map((entry) {
+              int index = entry.key;
+              Map<String, dynamic> item = entry.value;
+
+              return DataRow(
+                cells: [
+                  DataCell(
+                    Container(
+                      child: Text(item["name"]),
+                    ),
+                    onTap: () => showItemDialog(item: item, index: index),
+                  ),
+                  DataCell(
+                    Container(
+                      child: Text(item["quantity"].toString()),
+                    ),
+                    onTap: () => showItemDialog(item: item, index: index),
+                  ),
+                  DataCell(Text(item["unit"]),
+                      onTap: () => showItemDialog(item: item, index: index)),
+                  DataCell(Text(item["category"]),
+                      onTap: () => showItemDialog(item: item, index: index)),
+                  if (showColumn5)
+                    DataCell(Text("\$${item["price"]}"),
+                        onTap: () => showItemDialog(item: item, index: index)),
+                  if (showColumn6)
+                    DataCell(Text(item["supplier"]),
+                        onTap: () => showItemDialog(item: item, index: index)),
+                  if (showColumn7)
+                    DataCell(Text(item["expiry"]),
+                        onTap: () => showItemDialog(item: item, index: index)),
+                ],
+              );
+            }).toList(),
+          ),
+        ),
+      ]),
       floatingActionButton: FloatingActionButton(
         onPressed: () => showItemDialog(),
         child: Icon(Icons.add),
