@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'screens/settings.dart';
 import 'screens/login.dart';
 import './screens/home.dart';
+import './screens/inventory.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -62,6 +63,7 @@ class _MyAppState extends State<MyApp> {
         '/login': (context) => Login(),
         '/home': (context) => HomePage(),
         '/settings': (context) => SettingsScreen(onThemeChanged: _updateTheme),
+        '/inventory': (context) => InventoryPage(),
       },
     );
   }
