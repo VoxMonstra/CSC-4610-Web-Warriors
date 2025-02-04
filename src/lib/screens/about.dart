@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/drawer.dart';
 
 class AboutPage extends StatelessWidget {
   @override
@@ -8,6 +9,7 @@ class AboutPage extends StatelessWidget {
         title: Text('About Simple Bakery'),
         backgroundColor: Colors.brown,
       ),
+      drawer: AppDrawer(currPage: Text("about")),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
         child: Column(
