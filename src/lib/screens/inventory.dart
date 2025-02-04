@@ -24,9 +24,22 @@ class _InventoryPageState extends State<InventoryPage> {
     {"name": "Maple Syrup", "quantity": 20, "icon": Icons.breakfast_dining, "orderQty": 0},
     {"name": "Molasses", "quantity": 20, "icon": Icons.breakfast_dining_outlined, "orderQty": 0},
     {"name": "Yeast", "quantity": 20, "icon": Icons.bakery_dining, "orderQty": 0},
+    {"name": "Baking Powder", "quantity": 20, "icon": Icons.bakery_dining, "orderQty": 0},
+    {"name": "Baking Soda", "quantity": 20, "icon": Icons.bakery_dining, "orderQty": 0},
     {"name": "Butter", "quantity": 10, "icon": Icons.breakfast_dining, "orderQty": 0},
+    {"name": "Margarine", "quantity": 20, "icon": Icons.bakery_dining, "orderQty": 0},
+    {"name": "Vegietable Oil", "quantity": 20, "icon": Icons.oil_barrel, "orderQty": 0},
+    {"name": "Shortening", "quantity": 20, "icon": Icons.bakery_dining, "orderQty": 0},
     {"name": "Milk", "quantity": 30, "icon": Icons.coffee, "orderQty": 0},
-    {"name": "", "quantity": 20, "icon": Icons.abc, "orderQty": 0},
+    {"name": "Butter Milk", "quantity": 20, "icon": Icons.coffee, "orderQty": 0},
+    {"name": "Heavy Cream", "quantity": 20, "icon": Icons.coffee, "orderQty": 0},
+    {"name": "Eggs", "quantity": 20, "icon": Icons.egg, "orderQty": 0},
+    {"name": "Salt", "quantity": 20, "icon": Icons.bakery_dining, "orderQty": 0},
+    {"name": "Vanilla Extract", "quantity": 20, "icon": Icons.bakery_dining, "orderQty": 0},
+    {"name": "Cocoa Powder", "quantity": 20, "icon": Icons.bakery_dining, "orderQty": 0},
+    {"name": "Cinnamon", "quantity": 20, "icon": Icons.bakery_dining, "orderQty": 0},
+    {"name": "Chocolate Chips", "quantity": 20, "icon": Icons.bakery_dining, "orderQty": 0},
+    {"name": "Almonds", "quantity": 20, "icon": Icons.food_bank, "orderQty": 0},
   ];
 
   void _incrementOrder(int index) {
