@@ -17,9 +17,7 @@ class _InventoryPageState extends State<InventoryPage> {
 
   void _incrementOrder(int index) {
     setState(() {
-      if (inventory[index]["orderQty"] < inventory[index]["quantity"]) {
         inventory[index]["orderQty"]++;
-      }
     });
   }
 
@@ -34,7 +32,7 @@ class _InventoryPageState extends State<InventoryPage> {
   void _placeOrder(int index) {
     if (inventory[index]["orderQty"] > 0) {
       setState(() {
-        inventory[index]["quantity"] -= inventory[index]["orderQty"];
+        inventory[index]["quantity"] += inventory[index]["orderQty"];
         inventory[index]["orderQty"] = 0; // Reset order quantity after ordering
       });
     }
