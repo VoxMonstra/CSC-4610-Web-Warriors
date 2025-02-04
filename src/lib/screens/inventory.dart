@@ -128,7 +128,9 @@ class _InventoryPageState extends State<InventoryPage> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    bool showExtraColumns = screenWidth > 600; // Adjust threshold as needed
+    bool showColumn5 = screenWidth > 510; // Adjust threshold as needed
+    bool showColumn6 = screenWidth > 675;
+    bool showColumn7 = screenWidth > 825;
 
     return Scaffold(
       appBar: AppBar(
@@ -150,15 +152,15 @@ class _InventoryPageState extends State<InventoryPage> {
                 label: Text('Unit', style: TextStyle(color: Colors.white))),
             DataColumn(
                 label: Text('Category', style: TextStyle(color: Colors.white))),
-            if (showExtraColumns)
+            if (showColumn5)
               DataColumn(
                   label: Text('Price/Unit',
                       style: TextStyle(color: Colors.white))),
-            if (showExtraColumns)
+            if (showColumn6)
               DataColumn(
                   label:
                       Text('Supplier', style: TextStyle(color: Colors.white))),
-            if (showExtraColumns)
+            if (showColumn7)
               DataColumn(
                   label: Text('Expiry Date',
                       style: TextStyle(color: Colors.white))),
@@ -185,13 +187,13 @@ class _InventoryPageState extends State<InventoryPage> {
                     onTap: () => showItemDialog(item: item, index: index)),
                 DataCell(Text(item["category"]),
                     onTap: () => showItemDialog(item: item, index: index)),
-                if (showExtraColumns)
+                if (showColumn5)
                   DataCell(Text("\$${item["price"]}"),
                       onTap: () => showItemDialog(item: item, index: index)),
-                if (showExtraColumns)
+                if (showColumn6)
                   DataCell(Text(item["supplier"]),
                       onTap: () => showItemDialog(item: item, index: index)),
-                if (showExtraColumns)
+                if (showColumn7)
                   DataCell(Text(item["expiry"]),
                       onTap: () => showItemDialog(item: item, index: index)),
               ],
