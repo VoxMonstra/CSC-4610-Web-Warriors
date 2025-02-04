@@ -128,6 +128,13 @@ flutter doctor --android-licenses
 
 Now, running `flutter doctor` should pass all tests except for the test that determines what version Android Studio is. This is fine because Android Studio for Fedora is sandboxed in a Flatpak.
 
+Run this to setup the environment to properly execute `flutter run`:
+
+```
+flutter clean
+flutter build linux
+```
+
 ## Creating a Project
 
 
