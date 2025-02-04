@@ -130,7 +130,7 @@ class _LoginState extends State<Login> {
                         decoration: 
                         const InputDecoration(labelText: 'Last Name'),
                         validator: (value) => 
-                          value == null || value.isEmpty ? 'Enter your first name' : null,
+                          value == null || value.isEmpty ? 'Enter your last name' : null,
                       ),
                       const SizedBox(height: 10),
                     ],
@@ -139,7 +139,7 @@ class _LoginState extends State<Login> {
                       decoration: const InputDecoration(labelText: 'Email'),
                       keyboardType: TextInputType.emailAddress,
                       validator: (value) =>
-                        value == null || value.isEmpty ? 'Enter password' : null,
+                        value == null || value.isEmpty ? 'Enter Email' : null,
                       ),
                     const SizedBox(height: 10),
                     TextFormField(
