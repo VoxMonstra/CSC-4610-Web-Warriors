@@ -202,7 +202,7 @@ class _InventoryPageState extends State<InventoryPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () => showItemDialog(),
         child: Icon(Icons.add),
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.brown[200],
       ),
     );
   }
