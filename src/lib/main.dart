@@ -4,6 +4,7 @@ import 'screens/settings.dart';
 import 'screens/login.dart';
 import './screens/home.dart';
 import './screens/inventory.dart';
+import './screens/about.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -64,6 +65,7 @@ class _MyAppState extends State<MyApp> {
         '/home': (context) => HomePage(),
         '/settings': (context) => SettingsScreen(onThemeChanged: _updateTheme),
         '/inventory': (context) => InventoryPage(),
+        '/about': (context) => AboutPage(),
       },
     );
   }

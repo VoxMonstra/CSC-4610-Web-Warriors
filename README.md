@@ -95,7 +95,7 @@ Run the following to install dependencies:
 
 ```
 sudo dnf upgrade -y
-sudo dnf install curl git unzip xz zip mesa-libGLU ninja gtk3-devel cmake
+sudo dnf install curl git unzip clang xz zip mesa-libGLU ninja-build gtk3-devel cmake
 flatpak install com.google.AndroidStudio -y
 ```
 
@@ -127,6 +127,13 @@ flutter doctor --android-licenses
 ```
 
 Now, running `flutter doctor` should pass all tests except for the test that determines what version Android Studio is. This is fine because Android Studio for Fedora is sandboxed in a Flatpak.
+
+Run this to setup the environment to properly execute `flutter run`:
+
+```
+flutter clean
+flutter build linux
+```
 
 ## Creating a Project
 
