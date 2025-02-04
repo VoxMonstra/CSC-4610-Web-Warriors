@@ -8,14 +8,14 @@ class InventoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Welcome to the Inventory'),
+        title: Text('Inventory'),
         backgroundColor: Colors.brown,
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // The view box (no real future needed besides linking of database, 
+            // The view box (no real future needed besides linking of database,
             // maybe a search feature within, and maybe moving the edit here)
             GestureDetector(
               onTap: () {
@@ -72,7 +72,7 @@ class InventoryPage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 20), 
+            SizedBox(height: 20),
 
             // The edit box (future use will show inventory items to edit OR
             // will be within the view page itself which is likely)
@@ -118,11 +118,11 @@ class ViewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('View Page'),
+        title: Text('Inventory (View)'),
         backgroundColor: Colors.blue,
       ),
       body: Center(
-        child: Text('This is the View Page'),
+        child: Text('Here you can view the inventory'),
       ),
     );
   }
@@ -133,11 +133,11 @@ class CreatePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Create Page'),
+        title: Text('Inventory (Create)'),
         backgroundColor: Colors.green,
       ),
       body: Center(
-        child: Text('This is the Create Page'),
+        child: Text('Here you can create an inventory item'),
       ),
     );
   }
@@ -148,11 +148,11 @@ class EditPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Page'),
+        title: Text('Inventory (Edit)'),
         backgroundColor: Colors.orange,
       ),
       body: Center(
-        child: Text('This is the Edit Page'),
+        child: Text('Here you can edit the inventory'),
       ),
     );
   }
