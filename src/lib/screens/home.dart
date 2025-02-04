@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
               child: Center(
                 child: Text(
                   'Welcome to Simple Bakery!',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  style: Theme.of(context).textTheme.headlineMedium, // Theme text
                 ),
               ),
             ),
@@ -24,16 +24,13 @@ class HomePage extends StatelessWidget {
             // About section at the bottom
             Container(
               padding: EdgeInsets.all(16),
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.surface, // Adapts to the theme
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'About',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: Theme.of(context).textTheme.titleMedium,
                   ),
                   SizedBox(height: 8),
                   Text(
