@@ -41,6 +41,8 @@ class CartProvider with ChangeNotifier {
 }
 
 class BakeryShop extends StatelessWidget {
+
+  // This needs to be in the database, along with the ability for an admin to add, remove, or edit items
   final List<BakeryItem> items = [
     BakeryItem(name: 'Sourdough Bread', price: 5.0),
     BakeryItem(name: 'Baguettes', price: 3.5),

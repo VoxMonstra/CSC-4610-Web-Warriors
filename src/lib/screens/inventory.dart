@@ -8,7 +8,7 @@ class InventoryPage extends StatefulWidget {
   _InventoryPageState createState() => _InventoryPageState();
 }
 
-class _InventoryPageState extends State<InventoryPage> { // This needs to be in our database
+class _InventoryPageState extends State<InventoryPage> { // This needs to be in our database, along with the ability for an admin to add, remove, and edit items
   final List<Map<String, dynamic>> inventory = [  //{"name": "", "quantity": 20, "icon": Icons.abc, "orderQty": 0},
     {"name": "All-purpose Flour", "quantity": 20, "icon": Icons.bakery_dining, "orderQty": 0},
     {"name": "Bread Flour", "quantity": 20, "icon": Icons.bakery_dining, "orderQty": 0},
