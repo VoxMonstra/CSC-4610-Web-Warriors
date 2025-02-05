@@ -57,8 +57,13 @@ class BakeryShop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // Sidebar
       drawer: AppDrawer(currPage: Text("menu")),
+
+      // Title
       appBar: AppBar(title: Text('Bakery Shop'), actions: [
+
+        // Shopping cart button in the top right of the menu screen that goes to the cart screen when clicked.
         IconButton(
           icon: Icon(Icons.shopping_cart),
           onPressed: () => Navigator.push(
@@ -67,6 +72,8 @@ class BakeryShop extends StatelessWidget {
           ),
         )
       ]),
+
+      // Lists all of the consumer products with button to add item to cart when pushed
       body: ListView.builder(
         itemCount: items.length,
         itemBuilder: (context, index) {
@@ -74,6 +81,8 @@ class BakeryShop extends StatelessWidget {
           return ListTile(
             title: Text(item.name),
             subtitle: Text('\$${item.price.toStringAsFixed(2)}'),
+
+            // Button for adding respective item to the cart
             trailing: IconButton(
               icon: Icon(Icons.add_shopping_cart),
               onPressed: () {
@@ -95,12 +104,22 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final cart = context.watch<CartProvider>();
     return Scaffold(
+      
+      // Title
       appBar: AppBar(title: Text('Your Cart')),
-      body: cart.cart.isEmpty
+
+      // Displays everything that has been added to the cart, or "Your cart is empty" if the cart is empty
+      body: cart.cart.isEmpty //boolean condition
+      
+          // If .isEmpty returns true
           ? Center(child: Text('Your cart is empty'))
+
+          // If .isEmpty returns false
           : Column(
               children: [
                 Expanded(
+
+                  // displays each item in the shopping cart
                   child: ListView.builder(
                     itemCount: cart.cart.length,
                     itemBuilder: (context, index) {
@@ -108,6 +127,8 @@ class CartScreen extends StatelessWidget {
                       return ListTile(
                         title: Text(item.name),
                         subtitle: Text('\$${item.price.toStringAsFixed(2)}'),
+
+                        // Button for removing an item from the cart
                         trailing: IconButton(
                           icon: Icon(Icons.remove_circle),
                           onPressed: () => cart.removeItem(item),
@@ -120,9 +141,13 @@ class CartScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: [
+
+                      // Displays the total cost of everything in the cart
                       Text('Total: \$${cart.totalPrice.toStringAsFixed(2)}',
                           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                       SizedBox(height: 10),
+
+                      // Button to "Checkout" all of the items in the cart
                       ElevatedButton(
                         onPressed: () {
                           cart.clearCart();
