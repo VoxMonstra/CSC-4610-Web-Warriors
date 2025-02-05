@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'screens/settings.dart';
-import 'screens/login.dart';
-import './screens/home.dart';
-import './screens/inventory.dart';
+import './screens/settings.dart';
+import './screens/login.dart';
 import './screens/about.dart';
+import './screens/inventory.dart' as inv; // Alias to avoid conflicts
+import './screens/home.dart';
 import './screens/menu.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   ThemeMode themeMode = await _loadTheme();
   runApp(ChangeNotifierProvider(
-      create: (context) => CartProvider(), // Initializes CartProvider globally
-      child: MyApp(initialThemeMode: themeMode),
-    ),);
+    create: (context) => CartProvider(),
+    child: MyApp(initialThemeMode: themeMode),
+  ));
 }
 
 Future<ThemeMode> _loadTheme() async {
@@ -25,7 +25,6 @@ Future<ThemeMode> _loadTheme() async {
 
 class MyApp extends StatefulWidget {
   final ThemeMode initialThemeMode;
-
   const MyApp({super.key, required this.initialThemeMode});
 
   @override
@@ -41,7 +40,7 @@ class _MyAppState extends State<MyApp> {
     _themeMode = widget.initialThemeMode;
   }
 
- void _updateTheme(ThemeMode mode) async {
+  void _updateTheme(ThemeMode mode) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt('themeMode', mode.index);
     setState(() {
@@ -63,19 +62,20 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: true,
       ),
       darkTheme: ThemeData.dark(),
-      themeMode: _themeMode, // Dynamic theme selection
+      themeMode: _themeMode,
       initialRoute: '/home',
       routes: {
         '/login': (context) => Login(),
         '/home': (context) => HomePage(),
         '/settings': (context) => SettingsScreen(onThemeChanged: _updateTheme),
-        '/inventory': (context) => InventoryPage(),
+        '/inventory': (context) => inv.InventoryPage(), // Use alias since it literally won't work without it
         '/about': (context) => AboutPage(),
         '/menu': (context) => BakeryShop(),
       },
     );
   }
 }
+
 
 
 // class MyHomePage extends StatefulWidget {
