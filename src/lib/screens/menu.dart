@@ -79,6 +79,8 @@ class BakeryShop extends StatelessWidget {
               onPressed: () {
                 final cart = context.read<CartProvider>();
                 cart.addItem(item);
+                ScaffoldMessenger.of(context).showSnackBar(
+           SnackBar(content: Text('Added ' + item.name +' to cart')));
               },
             ),
           );
