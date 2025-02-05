@@ -9,22 +9,31 @@ class BakeryItem {
   BakeryItem({required this.name, required this.price});
 }
 
+// Class for managing the shopping cart's data and notifying the UI when changes occur
 class CartProvider with ChangeNotifier {
+
+   // ensures the list cannot be modified outside of the class
   final List<BakeryItem> _cart = [];
 
+  // Provides read-only access to the _cart list.
   List<BakeryItem> get cart => _cart;
+
+  // uses .fold() to add all of the individual prices together to get a total price
   double get totalPrice => _cart.fold(0, (sum, item) => sum + item.price);
 
+  // adds item to the cart
   void addItem(BakeryItem item) {
     _cart.add(item);
     notifyListeners();
   }
 
+  // removes item from the cart
   void removeItem(BakeryItem item) {
     _cart.remove(item);
     notifyListeners();
   }
 
+  // empties _cart
   void clearCart() {
     _cart.clear();
     notifyListeners();
