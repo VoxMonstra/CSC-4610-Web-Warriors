@@ -8,7 +8,7 @@ class InventoryPage extends StatefulWidget {
   _InventoryPageState createState() => _InventoryPageState();
 }
 
-class _InventoryPageState extends State<InventoryPage> {
+class _InventoryPageState extends State<InventoryPage> { // This needs to be in our database
   final List<Map<String, dynamic>> inventory = [  //{"name": "", "quantity": 20, "icon": Icons.abc, "orderQty": 0},
     {"name": "All-purpose Flour", "quantity": 20, "icon": Icons.bakery_dining, "orderQty": 0},
     {"name": "Bread Flour", "quantity": 20, "icon": Icons.bakery_dining, "orderQty": 0},
@@ -42,13 +42,15 @@ class _InventoryPageState extends State<InventoryPage> {
     {"name": "Almonds", "quantity": 20, "icon": Icons.food_bank, "orderQty": 0},
   ];
 
-  void _incrementOrder(int index) {
+// + button functionality
+  void _incrementOrder(int index) { 
     setState(() {
         inventory[index]["orderQty"]++;
     });
   }
 
-  void _decrementOrder(int index) {
+// - button functionality
+  void _decrementOrder(int index) { 
     setState(() {
       if (inventory[index]["orderQty"] > 0) {
         inventory[index]["orderQty"]--;
@@ -56,6 +58,7 @@ class _InventoryPageState extends State<InventoryPage> {
     });
   }
 
+// "Order" button functionality
   void _placeOrder(int index) {
     if (inventory[index]["orderQty"] > 0) {
       setState(() {
@@ -65,6 +68,7 @@ class _InventoryPageState extends State<InventoryPage> {
     }
   }
 
+// "Order All" button functionality.
   void _orderAll() {
     bool hasOrders = inventory.any((item) => item["orderQty"] > 0);
     
@@ -79,6 +83,7 @@ class _InventoryPageState extends State<InventoryPage> {
       }
     });
 
+    // Pop up message when items have been ordered
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text("All selected items have been ordered successfully!"),
@@ -87,6 +92,7 @@ class _InventoryPageState extends State<InventoryPage> {
     );
   }
 
+  // "Do any of the items have any pending orders?"
   bool _hasSelectedOrders() {
     return inventory.any((item) => item["orderQty"] > 0);
   }
