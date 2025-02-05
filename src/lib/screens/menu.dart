@@ -137,6 +137,8 @@ class CartScreen extends StatelessWidget {
                     },
                   ),
                 ),
+
+                // Bottom section to include total price of all cart items and checkout button
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
