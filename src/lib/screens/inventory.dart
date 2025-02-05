@@ -21,50 +21,38 @@ class _InventoryPageState extends State<InventoryPage> {
       "name": "Flour",
       "quantity": 10,
       "unit": "kg",
-      "category": "Ingredient",
       "price": 5.0,
-      "supplier": "Bakery Wholesale",
-      "expiry": "2025-06-30",
     },
     {
       "name": "Eggs",
       "quantity": 30,
       "unit": "pcs",
-      "category": "Dairy",
       "price": 0.5,
-      "supplier": "Local Farm",
-      "expiry": "2025-02-20",
     }
   ];
 
   // Function to show add/edit dialog
   void showItemDialog({Map<String, dynamic>? item, int? index}) {
     TextEditingController nameController =
-        TextEditingController(text: item?["name"] ?? "");
+        TextEditingController(text: item?["ingredient_name"] ?? "");
     TextEditingController quantityController =
-        TextEditingController(text: item?["quantity"]?.toString() ?? "");
+        TextEditingController(text: item?["amount"]?.toString() ?? "");
     TextEditingController unitController =
-        TextEditingController(text: item?["unit"] ?? "");
-    TextEditingController categoryController =
-        TextEditingController(text: item?["category"] ?? "");
+        TextEditingController(text: item?["ingredient_measurement"] ?? "");
     TextEditingController priceController =
-        TextEditingController(text: item?["price"]?.toString() ?? "");
-    TextEditingController supplierController =
-        TextEditingController(text: item?["supplier"] ?? "");
-    TextEditingController expiryController =
-        TextEditingController(text: item?["expiry"] ?? "");
+        TextEditingController(text: item?["unit_price"]?.toString() ?? "");
 
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text(item == null ? "Add Item" : "Edit Item"),
+          title: Text(item == null ? "Add Ingredient" : "Edit Ingredient"),
           content: SingleChildScrollView(
             child: Column(
               children: [
                 TextField(
                     controller: nameController,
-                    decoration: InputDecoration(labelText: 'Item Name')),
+                    decoration: InputDecoration(labelText: 'Ingredient')),
                 TextField(
                     controller: quantityController,
                     decoration: InputDecoration(labelText: 'Quantity'),
@@ -73,18 +61,9 @@ class _InventoryPageState extends State<InventoryPage> {
                     controller: unitController,
                     decoration: InputDecoration(labelText: 'Unit')),
                 TextField(
-                    controller: categoryController,
-                    decoration: InputDecoration(labelText: 'Category')),
-                TextField(
                     controller: priceController,
                     decoration: InputDecoration(labelText: 'Price per Unit'),
                     keyboardType: TextInputType.number),
-                TextField(
-                    controller: supplierController,
-                    decoration: InputDecoration(labelText: 'Supplier')),
-                TextField(
-                    controller: expiryController,
-                    decoration: InputDecoration(labelText: 'Expiration Date')),
               ],
             ),
           ),
@@ -100,10 +79,7 @@ class _InventoryPageState extends State<InventoryPage> {
                     "name": nameController.text,
                     "quantity": int.tryParse(quantityController.text) ?? 0,
                     "unit": unitController.text,
-                    "category": categoryController.text,
                     "price": double.tryParse(priceController.text) ?? 0.0,
-                    "supplier": supplierController.text,
-                    "expiry": expiryController.text,
                   };
 
                   if (item == null) {
@@ -128,9 +104,7 @@ class _InventoryPageState extends State<InventoryPage> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    bool showColumn5 = screenWidth > 510; // Adjust threshold as needed
-    bool showColumn6 = screenWidth > 675;
-    bool showColumn7 = screenWidth > 825;
+    bool showColumn4 = screenWidth > 420; // Adjust threshold as needed
 
     return Scaffold(
       appBar: AppBar(
@@ -164,23 +138,12 @@ class _InventoryPageState extends State<InventoryPage> {
                   label:
                       Text('Item Name', style: TextStyle(color: Colors.white))),
               DataColumn(
-                  label: Text('Qty', style: TextStyle(color: Colors.white))),
+                  label: Text('Amount', style: TextStyle(color: Colors.white))),
               DataColumn(
                   label: Text('Unit', style: TextStyle(color: Colors.white))),
-              DataColumn(
-                  label:
-                      Text('Category', style: TextStyle(color: Colors.white))),
-              if (showColumn5)
+              if (showColumn4)
                 DataColumn(
                     label: Text('Price/Unit',
-                        style: TextStyle(color: Colors.white))),
-              if (showColumn6)
-                DataColumn(
-                    label: Text('Supplier',
-                        style: TextStyle(color: Colors.white))),
-              if (showColumn7)
-                DataColumn(
-                    label: Text('Acquired',
                         style: TextStyle(color: Colors.white))),
             ],
             rows: inventory.asMap().entries.map((entry) {
@@ -203,16 +166,8 @@ class _InventoryPageState extends State<InventoryPage> {
                   ),
                   DataCell(Text(item["unit"]),
                       onTap: () => showItemDialog(item: item, index: index)),
-                  DataCell(Text(item["category"]),
-                      onTap: () => showItemDialog(item: item, index: index)),
-                  if (showColumn5)
+                  if (showColumn4)
                     DataCell(Text("\$${item["price"]}"),
-                        onTap: () => showItemDialog(item: item, index: index)),
-                  if (showColumn6)
-                    DataCell(Text(item["supplier"]),
-                        onTap: () => showItemDialog(item: item, index: index)),
-                  if (showColumn7)
-                    DataCell(Text(item["expiry"]),
                         onTap: () => showItemDialog(item: item, index: index)),
                 ],
               );
