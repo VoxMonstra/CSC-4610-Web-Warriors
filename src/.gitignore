@@ -40,10 +40,14 @@ app.*.symbols
 app.*.map.json
 
 # XCode related
-
 *.xcuserdata/
 *.xcuserstate
+*.xcconfig
+*.xcworkspacedata
 
+# CocoaPods
+ios/Podfile
+ios/Podfile.lock
 # Android Studio will place build artifacts here
 /android/app/debug
 /android/app/profile
