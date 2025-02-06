@@ -19,7 +19,7 @@ void main() async {
 
 Future<ThemeMode> _loadTheme() async {
   final prefs = await SharedPreferences.getInstance();
-  int themeIndex = prefs.getInt('themeMode') ?? 2; // Default to System theme
+  int themeIndex = prefs.getInt('themeMode') ?? 0; // Default to System theme
   return ThemeMode.values[themeIndex];
 }
 
@@ -68,15 +68,14 @@ class _MyAppState extends State<MyApp> {
         '/login': (context) => Login(),
         '/home': (context) => HomePage(),
         '/settings': (context) => SettingsScreen(onThemeChanged: _updateTheme),
-        '/inventory': (context) => inv.InventoryPage(), // Use alias since it literally won't work without it
+        '/inventory': (context) => inv
+            .InventoryPage(), // Use alias since it literally won't work without it
         '/about': (context) => AboutPage(),
         '/menu': (context) => BakeryShop(),
       },
     );
   }
 }
-
-
 
 // class MyHomePage extends StatefulWidget {
 //   const MyHomePage({super.key, required this.title});
