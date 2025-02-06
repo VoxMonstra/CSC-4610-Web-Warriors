@@ -162,47 +162,88 @@ class _LoginState extends State<Login> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    if (!userHasAccount) ... [
+                    if (userHasAccount) ...[
+                      TextFormField(
+                        controller: emailController,
+                        decoration: const InputDecoration(
+                          labelText: 'Email',
+                          labelStyle: TextStyle(color: Colors.black54),
+                        ),
+                        keyboardType: TextInputType.emailAddress,
+                        style: const TextStyle(color: Colors.black),
+                        validator: (value) =>
+                          value == null || value.isEmpty ? 'Enter Email' : null,
+                      ),
+                      const SizedBox(height: 10),
+                      TextFormField(
+                        controller: passwordController,
+                        decoration: const InputDecoration(
+                          labelText: 'Password',
+                          labelStyle: TextStyle(color: Colors.black54),
+                        ),
+                        obscureText: true,
+                        style: const TextStyle(color: Colors.black),
+                        validator: (value) =>
+                          value == null || value.isEmpty ? 'Enter password' : null,
+                      ),
+                    ] else ...[
                       TextFormField(
                         controller: firstNameController,
-                        decoration: const InputDecoration(labelText: 'First Name'),
+                        decoration: const InputDecoration(
+                          labelText: 'First Name',
+                          labelStyle: TextStyle(color: Colors.black54),
+                        ),
+                        style: const TextStyle(color: Colors.black),
                         validator: (value) =>
                           value == null || value.isEmpty ? 'Enter your first name' : null,
                       ),
                       const SizedBox(height: 10),
                       TextFormField(
                         controller: lastNameController,
-                        decoration: 
-                        const InputDecoration(labelText: 'Last Name'),
-                        validator: (value) => 
-                          value == null || value.isEmpty ? 'Enter your first name' : null,
+                        decoration: const InputDecoration(
+                          labelText: 'Last Name',
+                          labelStyle: TextStyle(color: Colors.black54),
+                        ),
+                        style: const TextStyle(color: Colors.black),
+                        validator: (value) =>
+                          value == null || value.isEmpty ? 'Enter your last name' : null,
                       ),
                       const SizedBox(height: 10),
-                    ],
-                    TextFormField(
-                      controller: emailController,
-                      decoration: const InputDecoration(labelText: 'Email'),
-                      keyboardType: TextInputType.emailAddress,
-                      validator: (value) =>
-                        value == null || value.isEmpty ? 'Enter email' : null,
+                      TextFormField(
+                        controller: emailController,
+                        decoration: const InputDecoration(
+                          labelText: 'Email',
+                          labelStyle: TextStyle(color: Colors.black54),
+                        ),
+                        keyboardType: TextInputType.emailAddress,
+                        style: const TextStyle(color: Colors.black),
+                        validator: (value) =>
+                          value == null || value.isEmpty ? 'Enter Email' : null,
                       ),
-                    const SizedBox(height: 10),
-                    TextFormField(
-                      controller: passwordController,
-                      decoration: const InputDecoration(labelText: 'Password'),
-                      obscureText: true,
-                      validator: (value) => 
-                        value == null || value.isEmpty ? 'Enter password' : null,
-                    ),
-                    if (!userHasAccount) ...[
+                      const SizedBox(height: 10),
+                      TextFormField(
+                        controller: passwordController,
+                        decoration: const InputDecoration(
+                          labelText: 'Password',
+                          labelStyle: TextStyle(color: Colors.black54),
+                        ),
+                        obscureText: true,
+                        style: const TextStyle(color: Colors.black),
+                        validator: (value) =>
+                          value == null || value.isEmpty ? 'Enter password' : null,
+                      ),
                       const SizedBox(height: 10),
                       TextFormField(
                         controller: confirmPasswordController,
-                        decoration: const InputDecoration(labelText: 'Confirm Password'),
+                        decoration: const InputDecoration(
+                          labelText: 'Confirm Password',
+                          labelStyle: TextStyle(color: Colors.black54),
+                        ),
                         obscureText: true,
+                        style: const TextStyle(color: Colors.black),
                         validator: (value) {
-                          if(value == null || value.isEmpty) return 'Confirm your password';
-                          if(value != passwordController.text) return 'Passwords do not match';
+                          if (value == null || value.isEmpty) return 'Confirm your password';
+                          if (value != passwordController.text) return 'Passwords do not match';
                           return null;
                         },
                       ),
@@ -211,26 +252,24 @@ class _LoginState extends State<Login> {
                     isLoading
                       ? const CircularProgressIndicator()
                       : ElevatedButton(
-                        onPressed: userHasAccount ? loginUser : registerUser,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFDC8515),
-                          foregroundColor: Colors.white,
-                          shadowColor: const Color(0xFF343330),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(6.0),
+                          onPressed: userHasAccount ? loginUser : registerUser,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFFDC8515),
+                            foregroundColor: Colors.white,
+                            shadowColor: const Color(0xFF343330),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6.0)),
+                            elevation: 5,
                           ),
-                          elevation: 5,
-                        ), 
-                        child: Text(userHasAccount ? 'Login' : 'Register'),
+                          child: Text(userHasAccount ? 'Login' : 'Register'),
                         ),
                     const SizedBox(height: 10),
                     TextButton(
                       onPressed: () {
-                          setState(() => userHasAccount = !userHasAccount);
+                        setState(() => userHasAccount = !userHasAccount);
                       },
-                        child: Text(userHasAccount
-                          ? "Create a new account"
-                          : "Sign in with existing account"),
+                      child: Text(userHasAccount
+                        ? "Create a new account"
+                        : "Sign in with existing account"),
                     ),
                   ],
                 ),
