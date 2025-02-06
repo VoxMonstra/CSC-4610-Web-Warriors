@@ -8,7 +8,7 @@ class InventoryPage extends StatefulWidget {
   _InventoryPageState createState() => _InventoryPageState();
 }
 
-class _InventoryPageState extends State<InventoryPage> {
+class _InventoryPageState extends State<InventoryPage> { // This needs to be in our database, along with the ability for an admin to add, remove, and edit items
   final List<Map<String, dynamic>> inventory = [  //{"name": "", "quantity": 20, "icon": Icons.abc, "orderQty": 0},
     {"name": "All-purpose Flour", "quantity": 20, "icon": Icons.bakery_dining, "orderQty": 0},
     {"name": "Bread Flour", "quantity": 20, "icon": Icons.bakery_dining, "orderQty": 0},
@@ -42,13 +42,15 @@ class _InventoryPageState extends State<InventoryPage> {
     {"name": "Almonds", "quantity": 20, "icon": Icons.food_bank, "orderQty": 0},
   ];
 
-  void _incrementOrder(int index) {
+// + button functionality
+  void _incrementOrder(int index) { 
     setState(() {
         inventory[index]["orderQty"]++;
     });
   }
 
-  void _decrementOrder(int index) {
+// - button functionality
+  void _decrementOrder(int index) { 
     setState(() {
       if (inventory[index]["orderQty"] > 0) {
         inventory[index]["orderQty"]--;
@@ -56,6 +58,7 @@ class _InventoryPageState extends State<InventoryPage> {
     });
   }
 
+// "Order" button functionality
   void _placeOrder(int index) {
     if (inventory[index]["orderQty"] > 0) {
       setState(() {
@@ -65,6 +68,7 @@ class _InventoryPageState extends State<InventoryPage> {
     }
   }
 
+// "Order All" button functionality.
   void _orderAll() {
     bool hasOrders = inventory.any((item) => item["orderQty"] > 0);
     
@@ -79,6 +83,7 @@ class _InventoryPageState extends State<InventoryPage> {
       }
     });
 
+    // Pop up message when items have been ordered
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text("All selected items have been ordered successfully!"),
@@ -87,6 +92,7 @@ class _InventoryPageState extends State<InventoryPage> {
     );
   }
 
+  // "Do any of the items have any pending orders?"
   bool _hasSelectedOrders() {
     return inventory.any((item) => item["orderQty"] > 0);
   }
@@ -94,8 +100,14 @@ class _InventoryPageState extends State<InventoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+      // Title
       appBar: AppBar(title: const Text('Inventory')),
+
+      // Sidebar
       drawer: AppDrawer(currPage: Text("inventory")),
+
+      // Displays all of the raw materials we currently have in stock, as well +- buttons for ordering raw materials
       body: Column(
         children: [
           Expanded(
@@ -109,27 +121,39 @@ class _InventoryPageState extends State<InventoryPage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+
+                        // Displays the icon of the item
                         Icon(inventory[index]["icon"], size: 40, color: Colors.brown),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+
+                            // Displays the name of the item, and how much is in stock
                             Text(inventory[index]["name"], style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                             Text("Stock: ${inventory[index]["quantity"]}", style: const TextStyle(fontSize: 14)),
                           ],
                         ),
                         Row(
                           children: [
+
+                            // minus button that decrements order quantity
                             IconButton(
                               icon: const Icon(Icons.remove, color: Colors.red),
                               onPressed: () => _decrementOrder(index),
                             ),
+
+                            // Displays the order quantity
                             Text("${inventory[index]['orderQty']}", style: const TextStyle(fontSize: 16)),
+
+                            // plus button that increments the order quantity
                             IconButton(
                               icon: const Icon(Icons.add, color: Colors.green),
                               onPressed: () => _incrementOrder(index),
                             ),
                           ],
                         ),
+
+                        // Button that adds the order quantity to the stock of the specific item
                         ElevatedButton(
                           onPressed: inventory[index]["orderQty"] > 0 ? () => _placeOrder(index) : null,
                           child: const Text("Order"),
@@ -141,8 +165,12 @@ class _InventoryPageState extends State<InventoryPage> {
               },
             ),
           ),
+
+          // Bottom section to contain the "Order all" button
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
+
+            // Button that adds order quantity to the stock quantity of all items
             child: ElevatedButton.icon(
               onPressed: _hasSelectedOrders() ? _orderAll : null,
               icon: const Icon(Icons.shopping_cart),
