@@ -1,120 +1,126 @@
-import 'dart:convert';
-
+import 'dart:convert'; // Import JSON encoding and decoding
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'home.dart';
 import '../widgets/drawer.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart' as http; // Import for making HTP requests
 
 class Login extends StatefulWidget {
-  const Login({super.key});
+  const Login({super.key}); // Login widget constructor
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Login> createState() => _LoginState(); // Create the state for the login widget
 }
 
 class _LoginState extends State<Login> {
-  // Preston: determines whether the app will show the 'login' screen or 'register' form
-  bool userHasAccount = true;
+  bool userHasAccount = true; // Preston: determines whether the app will show the 'login' screen or 'register' form
   bool isLoading = false; //track loading state
+
+  // Controllers for text input fields
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController confirmPasswordController = TextEditingController();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>(); // key for form validation
 
   String message ='';
+
+  // API URL
   final String apiUrl = 'https://simplybakery-dev.duckdns.org/api';
 
+  // function for registering an account
   Future<void> registerUser() async {
-    if (!_formKey.currentState!.validate()) return;
+    if (!_formKey.currentState!.validate()) return; // Validates the form fields, and return if they are not valid
 
       String email = emailController.text.trim();
       String password = passwordController.text.trim();
       String confirmPassword = confirmPasswordController.text.trim();
 
-      if(password != confirmPassword) {
+      if(password != confirmPassword) { // Check if password and confirm password match
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Passwords do not match")),
+          const SnackBar(content: Text("Passwords do not match")), // Show snackbar if passwords don't match
         );
-        return;
+        return; // Exit function if passwords don't match
       }
 
+      // Sets loading state to true
       setState(() => isLoading = true);
 
+      // HTTP POST request to register a new user
       try {
         final response = await http.post(
-          Uri.parse('$apiUrl/register'),
-          headers: {"Content-Type": "application/json"},
+          Uri.parse('$apiUrl/register'), // Parse the registration URL
+          headers: {"Content-Type": "application/json"}, // Set the request headers
           body: jsonEncode({
-            "email": email,
-            "password": password,
-            "first_name": firstNameController.text.trim(),
-            "last_name": lastNameController.text.trim(),
+            "email": email, // Include email in the request body
+            "password": password, // Include password in the request body
+            "first_name": firstNameController.text.trim(), // Include first trimmed name in the request body
+            "last_name": lastNameController.text.trim(), // Include trimmed last name in the request body
          }),
         );
 
-        final data = jsonDecode(response.body);
+        final data = jsonDecode(response.body); // Decode the JSON response body
 
-        if (response.statusCode == 201) {
+        if (response.statusCode == 201) { // Handle successful registration
           setState(() => message = "User Registered Successfully!");
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text("Registration successful for $email")),
           );
           setState(() => userHasAccount = true);
-        } else {
+        } else { // Handle failed registration
           setState(() => message = data['message']);
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text("Registration failed: ${data['message']}")),
           );
         }
-      } catch (e) {
+      } catch (e) { // Handle exception
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text("An error occurred: $e")),
         );
       } finally {
-        setState(() => isLoading = false);
+        setState(() => isLoading = false); // Reset loading state
       }
     }
 
+    // function for logging into a registered account
     Future<void> loginUser() async {
-      if (!_formKey.currentState!.validate()) return;
+      if (!_formKey.currentState!.validate()) return;// Validate the form fields, and return if the form is not valid
 
-      setState(() => isLoading = true);
+      setState(() => isLoading = true); // Sets loading state to true
 
       try {
         final response = await http.post(
-          Uri.parse('$apiUrl/login'),
-          headers: {"Content-Type": "application/json"},
+          Uri.parse('$apiUrl/login'), // Parse the login URL
+          headers: {"Content-Type": "application/json"}, // Set the request headers
           body: jsonEncode({
-            "email": emailController.text.trim(),
-            "password": passwordController.text.trim(),
+            "email": emailController.text.trim(), // Include trimmed email in the request body
+            "password": passwordController.text.trim(), // Include trimmed password in the request body
           }),
         );
 
-        final data = jsonDecode(response.body);
+        final data = jsonDecode(response.body); // Decode the JSON response body
 
-        print('Response body: $data');
+        // print('Response body: $data');
 
-        if (response.statusCode == 200) {
+        if (response.statusCode == 200) { // Handle successful login
           setState(() => message = "Login Successful:");
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text("Login Successful!")),
           );
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
-        } else {
+        } else { // Handle failed login
           setState(() => message = data['message']);
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text("Login Failed: ${data['message']}")),
           );
         }
-      } catch(e) {
+      } catch(e) {  // Handle exception
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text("An error occurred: $e")),
         );
       } finally {
-        setState(() => isLoading = false);
+        setState(() => isLoading = false); // Reset loading state
       }
     }
     @override
