@@ -284,7 +284,20 @@ class _InventoryPageState extends State<InventoryPage> {
 // + button functionality
   void _incrementOrder(int index) {
     setState(() {
-      inventory[index]["orderQty"]++;
+      // Find the item in the original inventory list
+      int inventoryIndex = inventory.indexWhere(
+          (item) => item["name"] == _filteredInventory[index]["name"]);
+      if (inventoryIndex == -1) return; // Ensure item exists
+
+      // Increment orderQty in the main inventory list
+      inventory[inventoryIndex]["orderQty"]++;
+
+      // Also update _filteredInventory to reflect changes immediately
+      _filteredInventory[index]["orderQty"] =
+          inventory[inventoryIndex]["orderQty"];
+
+      // Refresh UI
+      _filterInventory(_searchController.text);
     });
   }
 
@@ -292,7 +305,22 @@ class _InventoryPageState extends State<InventoryPage> {
   void _decrementOrder(int index) {
     setState(() {
       if (inventory[index]["orderQty"] > 0) {
-        inventory[index]["orderQty"]--;
+        // Find the item in the original inventory list
+        int inventoryIndex = inventory.indexWhere(
+            (item) => item["name"] == _filteredInventory[index]["name"]);
+        if (inventoryIndex == -1) return; // Ensure item exists
+
+        // Decrement orderQty in the main inventory list (prevent negative values)
+        if (inventory[inventoryIndex]["orderQty"] > 0) {
+          inventory[inventoryIndex]["orderQty"]--;
+        }
+
+        // Also update _filteredInventory to reflect changes immediately
+        _filteredInventory[index]["orderQty"] =
+            inventory[inventoryIndex]["orderQty"];
+
+        // Refresh UI
+        _filterInventory(_searchController.text);
       }
     });
   }
