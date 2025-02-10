@@ -459,12 +459,18 @@ class _InventoryPageState extends State<InventoryPage> {
   }
 
   void _editItem(int index) {
-    TextEditingController quantityController =
-        TextEditingController(text: inventory[index]["quantity"].toString());
+// Find the actual index in the main inventory list
+    int inventoryIndex = inventory.indexWhere(
+        (item) => item["name"] == _filteredInventory[index]["name"]);
+
+    if (inventoryIndex == -1) return; // Ensure item exists in main inventory
+
+    TextEditingController quantityController = TextEditingController(
+        text: inventory[inventoryIndex]["quantity"].toString());
     TextEditingController unitController =
-        TextEditingController(text: inventory[index]["unit"] ?? '');
+        TextEditingController(text: inventory[inventoryIndex]["unit"] ?? '');
     TextEditingController priceController = TextEditingController(
-        text: inventory[index]["price"]?.toString() ?? '');
+        text: inventory[inventoryIndex]["price"]?.toString() ?? '');
 
     showDialog(
       context: context,
@@ -498,16 +504,22 @@ class _InventoryPageState extends State<InventoryPage> {
             ElevatedButton(
               onPressed: () {
                 setState(() {
-                  inventory[index]["quantity"] =
+                  // Update the actual item in inventory
+                  inventory[inventoryIndex]["quantity"] =
                       int.tryParse(quantityController.text) ??
-                          inventory[index]["quantity"];
-                  inventory[index]["unit"] = unitController.text.isNotEmpty
-                      ? unitController.text
-                      : inventory[index]["unit"];
-                  inventory[index]["price"] =
+                          inventory[inventoryIndex]["quantity"];
+                  inventory[inventoryIndex]["unit"] =
+                      unitController.text.isNotEmpty
+                          ? unitController.text
+                          : inventory[inventoryIndex]["unit"];
+                  inventory[inventoryIndex]["price"] =
                       double.tryParse(priceController.text) ??
-                          inventory[index]["price"];
+                          inventory[inventoryIndex]["price"];
+
+                  // Re-filter the inventory so the updated item appears correctly
+                  _filterInventory(_searchController.text);
                 });
+
                 Navigator.pop(context);
               },
               child: const Text("Save"),
