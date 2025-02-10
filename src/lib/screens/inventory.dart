@@ -304,16 +304,17 @@ class _InventoryPageState extends State<InventoryPage> {
 // - button functionality
   void _decrementOrder(int index) {
     setState(() {
-      if (inventory[index]["orderQty"] > 0) {
+      // if (inventory[index]["orderQty"] > 0) {
+      if (inventory[index]["quantity"] + inventory[index]["orderQty"] > 0) {
         // Find the item in the original inventory list
         int inventoryIndex = inventory.indexWhere(
             (item) => item["name"] == _filteredInventory[index]["name"]);
         if (inventoryIndex == -1) return; // Ensure item exists
 
         // Decrement orderQty in the main inventory list (prevent negative values)
-        if (inventory[inventoryIndex]["orderQty"] > 0) {
-          inventory[inventoryIndex]["orderQty"]--;
-        }
+        // if (inventory[inventoryIndex]["orderQty"] > 0) {
+        inventory[inventoryIndex]["orderQty"]--;
+        // }
 
         // Also update _filteredInventory to reflect changes immediately
         _filteredInventory[index]["orderQty"] =
@@ -328,7 +329,7 @@ class _InventoryPageState extends State<InventoryPage> {
   void _saveChanges() {
     setState(() {
       for (var item in inventory) {
-        if (item["orderQty"] > 0) {
+        if (item["quantity"] + item["orderQty"] >= 0) {
           item["quantity"] += item["orderQty"];
           item["orderQty"] = 0;
         }
@@ -342,45 +343,6 @@ class _InventoryPageState extends State<InventoryPage> {
         _saveButtonText = "Save changes";
       });
     });
-  }
-
-// "Order" button functionality
-  void _placeOrder(int index) {
-    if (inventory[index]["orderQty"] > 0) {
-      setState(() {
-        inventory[index]["quantity"] += inventory[index]["orderQty"];
-        inventory[index]["orderQty"] = 0; // Reset order quantity after ordering
-      });
-    }
-  }
-
-// "Order All" button functionality.
-  void _orderAll() {
-    bool hasOrders = inventory.any((item) => item["orderQty"] > 0);
-
-    if (!hasOrders) return; // Prevents unnecessary updates
-
-    setState(() {
-      for (var item in inventory) {
-        if (item["orderQty"] > 0) {
-          item["quantity"] += item["orderQty"];
-          item["orderQty"] = 0;
-        }
-      }
-    });
-
-    // Pop up message when items have been ordered
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text("All selected items have been ordered successfully!"),
-        duration: Duration(seconds: 2),
-      ),
-    );
-  }
-
-  // "Do any of the items have any pending orders?"
-  bool _hasSelectedOrders() {
-    return inventory.any((item) => item["orderQty"] > 0);
   }
 
   void _viewItemDetails(int index) {
@@ -418,7 +380,8 @@ class _InventoryPageState extends State<InventoryPage> {
   }
 
   bool _hasChanges() {
-    return inventory.any((item) => item["orderQty"] > 0);
+    return inventory.any((item) =>
+        item["quantity"] + item["orderQty"] >= 0 && item["orderQty"] != 0);
   }
 
   void _showAddItemDialog() {
