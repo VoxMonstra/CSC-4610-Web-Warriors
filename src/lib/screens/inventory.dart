@@ -10,6 +10,9 @@ class InventoryPage extends StatefulWidget {
 
 class _InventoryPageState extends State<InventoryPage> {
   String _saveButtonText = "Save changes";
+  bool _isSearching = false;
+  TextEditingController _searchController = TextEditingController();
+  List<Map<String, dynamic>> _filteredInventory = [];
   // This needs to be in our database, along with the ability for an admin to add, remove, and edit items
   final List<Map<String, dynamic>> inventory = [
     {
@@ -258,6 +261,26 @@ class _InventoryPageState extends State<InventoryPage> {
     }, // Nuts & seeds
   ];
 
+  @override
+  void initState() {
+    super.initState();
+    _filteredInventory =
+        List.from(inventory); // Ensure full list is displayed at startup
+  }
+
+  void _filterInventory(String query) {
+    setState(() {
+      if (query.isEmpty) {
+        _filteredInventory = List.from(inventory);
+      } else {
+        _filteredInventory = inventory
+            .where((item) =>
+                item["name"].toLowerCase().contains(query.toLowerCase()))
+            .toList();
+      }
+    });
+  }
+
 // + button functionality
   void _incrementOrder(int index) {
     setState(() {
@@ -337,15 +360,15 @@ class _InventoryPageState extends State<InventoryPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text(inventory[index]["name"]),
+          title: Text(_filteredInventory[index]["name"]),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Stock: ${inventory[index]["quantity"]}"),
-              Text("Unit: ${inventory[index]["unit"] ?? 'N/A'}"),
+              Text("Stock: ${_filteredInventory[index]["quantity"]}"),
+              Text("Unit: ${_filteredInventory[index]["unit"] ?? 'N/A'}"),
               Text(
-                  "Price per unit: \$${inventory[index]["price"]?.toStringAsFixed(2) ?? 'N/A'}"),
+                  "Price per unit: \$${_filteredInventory[index]["price"]?.toStringAsFixed(2) ?? 'N/A'}"),
             ],
           ),
           actions: [
@@ -422,6 +445,7 @@ class _InventoryPageState extends State<InventoryPage> {
                           .local_grocery_store, // Default broad category icon
                       "orderQty": 0,
                     });
+                    _filterInventory(_searchController.text);
                   });
                   Navigator.pop(context);
                 }
@@ -499,8 +523,32 @@ class _InventoryPageState extends State<InventoryPage> {
     return Scaffold(
       // Title
       appBar: AppBar(
-        title: const Text('Inventory'),
+        title: _isSearching
+            ? TextField(
+                controller: _searchController,
+                autofocus: true,
+                decoration: const InputDecoration(
+                  hintText: "Search Inventory...",
+                  border: InputBorder.none,
+                  hintStyle: TextStyle(color: Colors.white60),
+                ),
+                style: const TextStyle(color: Colors.white, fontSize: 18),
+                onChanged: _filterInventory,
+              )
+            : const Text('Inventory'),
         actions: [
+          IconButton(
+            icon: Icon(_isSearching ? Icons.close : Icons.search),
+            onPressed: () {
+              setState(() {
+                _isSearching = !_isSearching;
+                if (!_isSearching) {
+                  _searchController.clear();
+                  _filterInventory("");
+                }
+              });
+            },
+          ),
           if (_hasChanges() ||
               _saveButtonText ==
                   "Save complete!") // Keep it visible if "Save Complete"
@@ -523,7 +571,7 @@ class _InventoryPageState extends State<InventoryPage> {
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: inventory.length,
+              itemCount: _filteredInventory.length,
               itemBuilder: (context, index) {
                 return Card(
                   margin:
@@ -538,7 +586,7 @@ class _InventoryPageState extends State<InventoryPage> {
                           padding: const EdgeInsets.only(
                               right: 12.0), // Adds right padding
                           child: Icon(
-                            inventory[index]["icon"],
+                            _filteredInventory[index]["icon"],
                             size: 40,
                             color: Colors.brown,
                           ),
@@ -553,7 +601,7 @@ class _InventoryPageState extends State<InventoryPage> {
                                 alignment:
                                     Alignment.centerLeft, // Left-aligns text
                                 child: Text(
-                                  inventory[index]["name"],
+                                  _filteredInventory[index]["name"],
                                   style: const TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold),
@@ -564,7 +612,7 @@ class _InventoryPageState extends State<InventoryPage> {
                               Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  "${inventory[index]["quantity"]} ${inventory[index]["unit"] ?? ''}",
+                                  "${_filteredInventory[index]["quantity"]} ${_filteredInventory[index]["unit"] ?? ''}",
                                   style: const TextStyle(fontSize: 14),
                                   textAlign: TextAlign.left,
                                 ),
