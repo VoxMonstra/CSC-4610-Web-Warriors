@@ -28,6 +28,7 @@ dev_dependencies:
 flutter:
   assets:
     - assets/gpt-generated-branding.png
+    - assets/profile_picture.png
 
   uses-material-design: true
 
