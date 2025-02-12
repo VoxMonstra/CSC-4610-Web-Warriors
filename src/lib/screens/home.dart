@@ -5,7 +5,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFD2B48C), // Light brown background
+      backgroundColor: Color(0xFFE3CCB0), // Light brown background
       appBar: AppBar(
         title: Text('Home'),
         backgroundColor: Color(0xFF212121),
@@ -71,8 +71,9 @@ class HomePage extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Color(0xFF212121), // Darker Gray as in wireframe
+        color: Color(0xFF4E3D32), // Darker Brown as in wireframe
         shape: CircularNotchedRectangle(),
+        notchMargin: 0.0,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -89,6 +90,14 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/home');
+        },
+        backgroundColor: Color(0xFF6B835C), // Lighter Green as in wireframe
+        child: Icon(Icons.home),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 
