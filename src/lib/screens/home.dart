@@ -30,8 +30,8 @@ class HomePage extends StatelessWidget {
                   Text(
                     'Welcome [name]', // Soon creating function to gather first and potentially last name and display them here
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      color: Colors.black,
-                    ),
+                          color: Colors.black,
+                        ),
                   ),
                   SizedBox(height: 16),
                   CircleAvatar(
@@ -42,27 +42,39 @@ class HomePage extends StatelessWidget {
                   Text(
                     'Order',
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: Colors.black,
-                    ),
+                          color: Colors.black,
+                        ),
                   ),
                   SizedBox(height: 20),
-                  Wrap(
-                    spacing: 16,
-                    runSpacing: 16,
-                    children: List.generate(4, (index) => _buildOrderBox(context)),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: List.generate(
+                          20,
+                          (index) => Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: _buildOrderBox(context))),
+                    ),
                   ),
                   SizedBox(height: 30), // Space before Order History
                   Text(
                     'Order History',
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: Colors.black,
-                    ),
+                          color: Colors.black,
+                        ),
                   ),
                   SizedBox(height: 20),
-                  Wrap(
-                    spacing: 16,
-                    runSpacing: 16,
-                    children: List.generate(4, (index) => _buildOrderBox(context)),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: List.generate(
+                          20,
+                          (index) => Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: _buildOrderBox(context))),
+                    ),
                   ),
                 ],
               ),
@@ -79,7 +91,8 @@ class HomePage extends StatelessWidget {
           children: [
             IconButton(
               icon: Icon(Icons.shopping_cart, color: Colors.white),
-              onPressed: () {}, // Placeholder action, don't know where to route it yet
+              onPressed:
+                  () {}, // Placeholder action, don't know where to route it yet
             ),
             IconButton(
               icon: Icon(Icons.info, color: Colors.white),
@@ -96,14 +109,15 @@ class HomePage extends StatelessWidget {
         },
         backgroundColor: Color(0xFF6B835C), // Lighter Green as in wireframe
         child: Icon(Icons.home),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 
   Widget _buildOrderBox(BuildContext context) {
     return GestureDetector(
-      onTap: () {}, // Placeholder for routing of the order's and expected categories in the future
+      onTap:
+          () {}, // Placeholder for routing of the order's and expected categories in the future
       child: Container(
         width: 100,
         height: 100,
@@ -112,7 +126,10 @@ class HomePage extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
         ),
         child: Center(
-          child: Icon(Icons.image, size: 50, color: Colors.grey), // Maybe to have actual picture, or just icon per category
+          child: Icon(Icons.image,
+              size: 50,
+              color: Colors
+                  .grey), // Maybe to have actual picture, or just icon per category
         ),
       ),
     );
