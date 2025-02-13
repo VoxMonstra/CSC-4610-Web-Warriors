@@ -294,7 +294,7 @@ class _InventoryPageState extends State<InventoryPage> {
   void _switchInventory(String newInventory) {
     setState(() {
       currInventory = newInventory; // Update the current inventory name
-      if (currInventory == "Products") {
+      if (currInventory == "products") {
         inventory = List.from(products);
       } else {
         inventory = List.from(ingredients); // Default to Ingredients
