@@ -301,6 +301,7 @@ class _InventoryPageState extends State<InventoryPage> {
       }
       filteredInventory = List.from(inventory); // Sync filtered list
     });
+    _filterInventory(_searchController.text);
   }
 
   void _filterInventory(String query) {
