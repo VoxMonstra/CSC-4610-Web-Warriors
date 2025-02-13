@@ -51,7 +51,7 @@ class AboutPage extends StatelessWidget {
 
             _buildCard(
               icon: Icons.people,
-              title: 'Our Commitment to the Community',
+              title: 'Our Commitment',
               content:
                   'We believe in giving back! We donate surplus baked goods to local shelters, partner with small businesses, and host **baking workshops** for the community. 🤝✨',
             ),
