@@ -701,22 +701,24 @@ class _InventoryPageState extends State<InventoryPage> {
                         Row(
                           children: [
                             // minus button that decrements order quantity
-                            IconButton(
-                              icon: const Icon(Icons.remove,
-                                  color: Color(0xFFc75c5c)),
-                              onPressed: () => _decrementOrder(index),
-                            ),
+                            if (currInventory == "products") ...[
+                              IconButton(
+                                icon: const Icon(Icons.remove,
+                                    color: Color(0xFFc75c5c)),
+                                onPressed: () => _decrementOrder(index),
+                              ),
 
-                            // Displays the order quantity
-                            Text("${inventory[index]['orderQty']}",
-                                style: const TextStyle(fontSize: 16)),
+                              // Displays the order quantity
+                              Text("${inventory[index]['orderQty']}",
+                                  style: const TextStyle(fontSize: 16)),
 
-                            // plus button that increments the order quantity
-                            IconButton(
-                              icon: const Icon(Icons.add,
-                                  color: Color(0xFF5f967c)),
-                              onPressed: () => _incrementOrder(index),
-                            ),
+                              // plus button that increments the order quantity
+                              IconButton(
+                                icon: const Icon(Icons.add,
+                                    color: Color(0xFF5f967c)),
+                                onPressed: () => _incrementOrder(index),
+                              ),
+                            ],
                           ],
                         ),
 
