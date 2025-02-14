@@ -46,17 +46,20 @@ class HomePage extends StatelessWidget {
                         ),
                   ),
                   SizedBox(height: 20),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: List.generate(
-                          20,
-                          (index) => Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: _buildOrderBox(context))),
-                    ),
-                  ),
+                  Container(
+                      color: Color(0xFFE7DCCD),
+                      height: 150,
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: List.generate(
+                              20,
+                              (index) => Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0),
+                                  child: _buildOrderBox(context))),
+                        ),
+                      )),
                   SizedBox(height: 30), // Space before Order History
                   Text(
                     'Order History',
