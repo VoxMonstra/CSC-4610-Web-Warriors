@@ -6,7 +6,9 @@ class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFE3CCB0), // Updated background color
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.white),
         title: Text(
           'About Simple Bakery',
           style: GoogleFonts.lora(fontWeight: FontWeight.bold),
@@ -68,7 +70,6 @@ class AboutPage extends StatelessWidget {
 
             SizedBox(height: 16),
 
-            // Call-to-Action Button
             Center(
               child: ElevatedButton(
                 onPressed: () {},
@@ -94,7 +95,7 @@ class AboutPage extends StatelessWidget {
             ),
             SizedBox(height: 8),
 
-            // Social Media Icons
+            // Social Media Icons non working
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -111,11 +112,11 @@ class AboutPage extends StatelessWidget {
     );
   }
 
-  /// Helper Function to Create a Card Section
   Widget _buildCard({required IconData icon, required String title, required String content}) {
     return Card(
       elevation: 4,
       margin: EdgeInsets.symmetric(vertical: 8),
+      color: Color(0xFFF5E6D3), // Light background for contrast
       child: Padding(
         padding: EdgeInsets.all(16),
         child: Column(

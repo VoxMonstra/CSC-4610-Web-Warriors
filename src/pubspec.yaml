@@ -29,6 +29,7 @@ flutter:
   assets:
     - assets/gpt-generated-branding.png
     - assets/profile_picture.png
+    - assets/newlogoTransparent.png
 
   uses-material-design: true
 

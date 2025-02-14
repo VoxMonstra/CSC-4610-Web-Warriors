@@ -575,6 +575,7 @@ class _InventoryPageState extends State<InventoryPage> {
                 onChanged: _filterInventory,
               )
             : const Text('Inventory'),
+        iconTheme: IconThemeData(color: Colors.white),
         actions: [
           IconButton(
             icon: Icon(_isSearching ? Icons.close : Icons.search),

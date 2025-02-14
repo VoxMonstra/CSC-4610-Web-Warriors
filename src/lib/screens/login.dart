@@ -136,6 +136,7 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Welcome'),
+      iconTheme: IconThemeData(color: Colors.white),
       ),
       drawer: AppDrawer(currPage: Text('login')),
       body: Stack(

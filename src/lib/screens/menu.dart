@@ -63,7 +63,9 @@ class BakeryShop extends StatelessWidget {
       drawer: AppDrawer(currPage: Text("menu")),
 
       // Title
-      appBar: AppBar(title: Text('Bakery Shop'), actions: [
+      appBar: AppBar(title: Text('Bakery Shop'),
+      iconTheme: IconThemeData(color: Colors.white),
+      actions: [
 
         // Shopping cart button in the top right of the menu screen that goes to the cart screen when clicked.
         IconButton(
