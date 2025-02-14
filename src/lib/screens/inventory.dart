@@ -282,6 +282,17 @@ class _InventoryPageState extends State<InventoryPage> {
     },
   ];
 
+  List<Map<String, dynamic>> damages = [
+    {
+      "name": "Croissant",
+      "quantity": 8,
+      "unit": "pcs",
+      "price": 3.00,
+      "icon": Icons.bakery_dining,
+      "orderQty": 0
+    }
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -294,8 +305,14 @@ class _InventoryPageState extends State<InventoryPage> {
   void _switchInventory(String newInventory) {
     setState(() {
       currInventory = newInventory; // Update the current inventory name
+      if (currInventory == "ingredients") {
+        inventory = List.from(ingredients);
+      }
       if (currInventory == "products") {
         inventory = List.from(products);
+      }
+      if (currInventory == "damages") {
+        inventory = List.from(damages);
       } else {
         inventory = List.from(ingredients); // Default to Ingredients
       }
@@ -643,6 +660,21 @@ class _InventoryPageState extends State<InventoryPage> {
                     ),
                   ),
                 ),
+                const Text(" | "), // Divider between buttons
+                TextButton(
+                  onPressed: () => _switchInventory("damages"),
+                  child: Text(
+                    "Damages",
+                    style: TextStyle(
+                      fontWeight: currInventory == "damages"
+                          ? FontWeight.bold
+                          : FontWeight.normal,
+                      color: currInventory == "damages"
+                          ? Colors.black
+                          : Colors.grey,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -701,7 +733,8 @@ class _InventoryPageState extends State<InventoryPage> {
                         Row(
                           children: [
                             // minus button that decrements order quantity
-                            if (currInventory == "products") ...[
+                            if (currInventory == "products" ||
+                                currInventory == "damages") ...[
                               IconButton(
                                 icon: const Icon(Icons.remove,
                                     color: Color(0xFFc75c5c)),
