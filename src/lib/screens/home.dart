@@ -84,8 +84,7 @@ class HomePage extends StatelessWidget {
       ),
       bottomNavigationBar: BottomAppBar(
         color: Color(0xFF4E3D32), // Darker Brown as in wireframe
-        shape: CircularNotchedRectangle(),
-        notchMargin: 0.0,
+        shape: null,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
