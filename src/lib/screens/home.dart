@@ -106,7 +106,7 @@ class HomePage extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Color(0xFF4E3D32),
+        color: Color(0xFF212121),
         shape: CircularNotchedRectangle(),
         notchMargin: 0.0,
         child: Row(

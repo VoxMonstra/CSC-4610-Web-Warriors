@@ -43,7 +43,7 @@ class AboutPage extends StatelessWidget {
 
             _buildCard(
               icon: Icons.star,
-              title: 'Why Choose Simple Bakery?',
+              title: 'Why Choose Us?',
               content:
                   '🏠 **Handcrafted with Love** – Every item is made from scratch using time-honored techniques.\n'
                   '🌱 **Locally Sourced Ingredients** – We partner with local farmers for the freshest products.\n'
