@@ -307,11 +307,9 @@ class _InventoryPageState extends State<InventoryPage> {
       currInventory = newInventory; // Update the current inventory name
       if (currInventory == "ingredients") {
         inventory = List.from(ingredients);
-      }
-      if (currInventory == "products") {
+      } else if (currInventory == "products") {
         inventory = List.from(products);
-      }
-      if (currInventory == "damages") {
+      } else if (currInventory == "damages") {
         inventory = List.from(damages);
       } else {
         inventory = List.from(ingredients); // Default to Ingredients
