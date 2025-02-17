@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../widgets/drawer.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:src/widgets/bottom_nav_bar.dart';
+import 'package:src/widgets/home_button.dart';
 
 class AboutPage extends StatelessWidget {
   @override
@@ -17,6 +19,7 @@ class AboutPage extends StatelessWidget {
       ),
       drawer: AppDrawer(currPage: Text("about")),
       body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
         padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,6 +112,7 @@ class AboutPage extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: HomeButton(),
     );
   }
 
@@ -128,14 +132,14 @@ class AboutPage extends StatelessWidget {
                 SizedBox(width: 8),
                 Text(
                   title,
-                  style: GoogleFonts.lora(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: GoogleFonts.lora(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
                 ),
               ],
             ),
             SizedBox(height: 8),
             Text(
               content,
-              style: GoogleFonts.lora(fontSize: 16),
+              style: GoogleFonts.lora(fontSize: 16, color: Colors.black),
             ),
           ],
         ),

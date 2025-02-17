@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:src/widgets/bottom_nav_bar.dart';
+import 'package:src/widgets/home_button.dart';
 import '../widgets/drawer.dart';
 
 class HomePage extends StatelessWidget {
@@ -8,7 +10,7 @@ class HomePage extends StatelessWidget {
       backgroundColor: Color(0xFFE3CCB0), // Light brown background
       appBar: AppBar(
         title: Text('Home'),
-        backgroundColor: Color(0xFF212121),
+        backgroundColor: Color(0xFF4E3D32),
         iconTheme: IconThemeData(color: Colors.white),
         actions: [
           IconButton(
@@ -105,45 +107,8 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        color: Color(0xFF212121),
-        shape: CircularNotchedRectangle(),
-        notchMargin: 0.0,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            IconButton(
-              icon: Icon(Icons.shopping_cart, color: Colors.white),
-              onPressed: () {
-                Navigator.pushNamed(context, '/inventory');
-              },
-            ),
-            IconButton(
-              icon: Icon(Icons.receipt, color: Colors.white),
-              onPressed: () {
-                Navigator.pushNamed(context, '/menu');
-              },
-            ),
-            IconButton(
-              icon: Icon(Icons.info, color: Colors.white),
-              onPressed: () {
-                Navigator.pushNamed(context, '/about');
-              },
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/home');
-        },
-        backgroundColor: Color(0xFF6B835C),
-        child: CircleAvatar(
-          backgroundImage: AssetImage('assets/newlogoTransparent.png'),
-          radius: 20,
-          backgroundColor: Colors.transparent,
-        ),
-      ),
+      bottomNavigationBar: BottomNavBar(currPage: Text('home')),
+      floatingActionButton: HomeButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
