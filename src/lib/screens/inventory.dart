@@ -282,16 +282,15 @@ class _InventoryPageState extends State<InventoryPage> {
     },
   ];
 
-  List<Map<String, dynamic>> damages = [
-    {
-      "name": "Croissant",
-      "quantity": 8,
-      "unit": "pcs",
-      "price": 3.00,
-      "icon": Icons.bakery_dining,
-      "orderQty": 0
-    }
+  List<String> damageReasons = [
+    "Expired",
+    "Mishandling",
+    "Fridge/Freezer Outage",
+    "Transport/Shipping Damage",
+    "Other"
   ];
+
+  String selectedDamageReason = "Expired";
 
   @override
   void initState() {
@@ -310,11 +309,14 @@ class _InventoryPageState extends State<InventoryPage> {
       } else if (currInventory == "products") {
         inventory = List.from(products);
       } else if (currInventory == "damages") {
-        inventory = List.from(damages);
+        inventory = List.from(ingredients)..addAll(products);
+        selectedDamageReason = "Expired";
       } else {
         inventory = List.from(ingredients); // Default to Ingredients
       }
       filteredInventory = List.from(inventory); // Sync filtered list
+      inventory.sort((a, b) => a["name"].compareTo(b["name"]));
+      filteredInventory.sort((a, b) => a["name"].compareTo(b["name"]));
     });
     _filterInventory(_searchController.text);
   }
@@ -617,56 +619,88 @@ class _InventoryPageState extends State<InventoryPage> {
           // Toggle Button Row
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            child: Column(
               children: [
-                TextButton(
-                  onPressed: () => _switchInventory("ingredients"),
-                  child: Text(
-                    "Ingredients",
-                    style: TextStyle(
-                      fontWeight: currInventory == "ingredients"
-                          ? FontWeight.bold
-                          : FontWeight.normal,
-                      color: currInventory == "ingredients"
-                          ? Colors.black
-                          : Colors.grey,
+                // Toggle Buttons
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextButton(
+                      onPressed: () => _switchInventory("ingredients"),
+                      child: Text(
+                        "Ingredients",
+                        style: TextStyle(
+                          fontWeight: currInventory == "ingredients"
+                              ? FontWeight.bold
+                              : FontWeight.normal,
+                          color: currInventory == "ingredients"
+                              ? Colors.black
+                              : Colors.grey,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                const Text(" | "), // Divider between buttons
-                TextButton(
-                  onPressed: () => _switchInventory("products"),
-                  child: Text(
-                    "Products",
-                    style: TextStyle(
-                      fontWeight: currInventory == "products"
-                          ? FontWeight.bold
-                          : FontWeight.normal,
-                      color: currInventory == "products"
-                          ? Colors.black
-                          : Colors.grey,
+                    const Text(" | "),
+                    TextButton(
+                      onPressed: () => _switchInventory("products"),
+                      child: Text(
+                        "Products",
+                        style: TextStyle(
+                          fontWeight: currInventory == "products"
+                              ? FontWeight.bold
+                              : FontWeight.normal,
+                          color: currInventory == "products"
+                              ? Colors.black
+                              : Colors.grey,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                const Text(" | "), // Divider between buttons
-                TextButton(
-                  onPressed: () => _switchInventory("damages"),
-                  child: Text(
-                    "Damages",
-                    style: TextStyle(
-                      fontWeight: currInventory == "damages"
-                          ? FontWeight.bold
-                          : FontWeight.normal,
-                      color: currInventory == "damages"
-                          ? Colors.black
-                          : Colors.grey,
+                    const Text(" | "),
+                    TextButton(
+                      onPressed: () => _switchInventory("damages"),
+                      child: Text(
+                        "Damages",
+                        style: TextStyle(
+                          fontWeight: currInventory == "damages"
+                              ? FontWeight.bold
+                              : FontWeight.normal,
+                          color: currInventory == "damages"
+                              ? Colors.black
+                              : Colors.grey,
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
+
+                // Damage reason dropdown (only for "Damages" inventory)
+                if (currInventory == "damages") ...[
+                  const SizedBox(height: 10), // Add spacing
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text("Damage Reason: "),
+                      DropdownButton<String>(
+                        value: selectedDamageReason,
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            selectedDamageReason = newValue!;
+                          });
+                        },
+                        items: damageReasons
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                    ],
+                  ),
+                ],
               ],
             ),
           ),
+
           Expanded(
             child: ListView.builder(
               itemCount: filteredInventory.length,
