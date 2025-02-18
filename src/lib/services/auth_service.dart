@@ -70,7 +70,7 @@ class AuthService {
         final data = jsonDecode(response.body);
         final token = data['token']; //response should contain a token
         await storeToken(token); //store
-
+        print(token);
         return true;
       } else {
         throw Exception('Login failed: ${response.body}');
