@@ -27,6 +27,16 @@ dev_dependencies:
 
 flutter:
   assets:
+    - assets/Sourdough Bread.jpg
+    - assets/Baguettes.jpg
+    - assets/Ciabatta.jpg
+    - assets/Croissants.jpg
+    - assets/Muffins.jpg
+    - assets/Scones.jpg
+    - assets/Cookies.jpg
+    - assets/Brownies & Blondies.jpg
+    - assets/Cinnamon Rolls.jpg
+    - assets/Specialty Cakes.jpg
     - assets/gpt-generated-branding.png
     - assets/profile_picture.png
     - assets/newlogoTransparent.png

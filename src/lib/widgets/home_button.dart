@@ -8,19 +8,13 @@ class HomeButton extends StatelessWidget {
         Navigator.pushNamed(context, '/home');
       },
       backgroundColor: Color(0xFF6B835C),
-      /*child: Image.asset(
+      shape: CircleBorder(),
+        child: Image.asset(
           'assets/newlogoTransparent.png',
           fit: BoxFit.cover,
           width: 40,
           height: 40,
-          
         ),
-        */
-      child: Icon(
-        Icons.home,
-        color: Colors.white,
-        size: 40,
-      ),
     );
   }
 }
