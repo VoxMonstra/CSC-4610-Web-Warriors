@@ -333,40 +333,41 @@ class _InventoryPageState extends State<InventoryPage> {
   }
 
 // + button functionality
-  void _incrementOrder(int index) {
+  void _incrementOrder(int currIndex) {
     setState(() {
       // Find the item in the original inventory list
-      int inventoryIndex = inventory.indexWhere(
-          (item) => item["name"] == filteredInventory[index]["name"]);
-      if (inventoryIndex == -1) return; // Ensure item exists
+      int actualIndex = inventory.indexWhere(
+          (item) => item["name"] == filteredInventory[currIndex]["name"]);
+      if (actualIndex == -1) return; // Ensure item exists
 
       // Increment orderQty in the main inventory list
-      inventory[inventoryIndex]["orderQty"]++;
+      inventory[actualIndex]["orderQty"]++;
 
       // Also update filteredInventory to reflect changes immediately
-      filteredInventory[index]["orderQty"] =
-          inventory[inventoryIndex]["orderQty"];
+      filteredInventory[currIndex]["orderQty"] =
+          inventory[actualIndex]["orderQty"];
     });
   }
 
 // - button functionality
-  void _decrementOrder(int index) {
+  void _decrementOrder(int currIndex) {
     setState(() {
       // if (inventory[index]["orderQty"] > 0) {
-      if (inventory[index]["quantity"] + inventory[index]["orderQty"] > 0) {
+      if (inventory[currIndex]["quantity"] + inventory[currIndex]["orderQty"] >
+          0) {
         // Find the item in the original inventory list
-        int inventoryIndex = inventory.indexWhere(
-            (item) => item["name"] == filteredInventory[index]["name"]);
-        if (inventoryIndex == -1) return; // Ensure item exists
+        int actualIndex = inventory.indexWhere(
+            (item) => item["name"] == filteredInventory[currIndex]["name"]);
+        if (actualIndex == -1) return; // Ensure item exists
 
         // Decrement orderQty in the main inventory list (prevent negative values)
         // if (inventory[inventoryIndex]["orderQty"] > 0) {
-        inventory[inventoryIndex]["orderQty"]--;
+        inventory[actualIndex]["orderQty"]--;
         // }
 
         // Also update filteredInventory to reflect changes immediately
-        filteredInventory[index]["orderQty"] =
-            inventory[inventoryIndex]["orderQty"];
+        filteredInventory[currIndex]["orderQty"] =
+            inventory[actualIndex]["orderQty"];
       }
     });
   }
