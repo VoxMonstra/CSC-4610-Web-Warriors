@@ -63,7 +63,7 @@ class _MyAppState extends State<MyApp> {
       ),
       darkTheme: ThemeData.dark(),
       themeMode: _themeMode,
-      initialRoute: '/home',
+      initialRoute: '/login',
       routes: {
         '/login': (context) => Login(),
         '/home': (context) => HomePage(),
