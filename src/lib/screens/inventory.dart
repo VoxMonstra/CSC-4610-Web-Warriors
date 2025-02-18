@@ -12,9 +12,11 @@ class _InventoryPageState extends State<InventoryPage> {
   String _saveButtonText = "Save changes";
   bool _isSearching = false;
   TextEditingController _searchController = TextEditingController();
-  List<Map<String, dynamic>> _filteredInventory = [];
+  String currInventory = "ingredients";
+  List<Map<String, dynamic>> inventory = [];
+  List<Map<String, dynamic>> filteredInventory = [];
   // This needs to be in our database, along with the ability for an admin to add, remove, and edit items
-  final List<Map<String, dynamic>> inventory = [
+  final List<Map<String, dynamic>> ingredients = [
     {
       "name": "All-purpose Flour",
       "quantity": 20,
@@ -261,19 +263,53 @@ class _InventoryPageState extends State<InventoryPage> {
     }, // Nuts & seeds
   ];
 
+  List<Map<String, dynamic>> products = [
+    {
+      "name": "Baguette",
+      "quantity": 10,
+      "unit": "pcs",
+      "price": 2.50,
+      "icon": Icons.bakery_dining,
+      "orderQty": 0
+    },
+    {
+      "name": "Croissant",
+      "quantity": 8,
+      "unit": "pcs",
+      "price": 3.00,
+      "icon": Icons.bakery_dining,
+      "orderQty": 0
+    },
+  ];
+
   @override
   void initState() {
     super.initState();
-    _filteredInventory =
+    inventory =
+        List.from(ingredients); // Ensure full list is displayed at startup
+    filteredInventory =
         List.from(inventory); // Ensure full list is displayed at startup
+  }
+
+  void _switchInventory(String newInventory) {
+    setState(() {
+      currInventory = newInventory; // Update the current inventory name
+      if (currInventory == "products") {
+        inventory = List.from(products);
+      } else {
+        inventory = List.from(ingredients); // Default to Ingredients
+      }
+      filteredInventory = List.from(inventory); // Sync filtered list
+    });
+    _filterInventory(_searchController.text);
   }
 
   void _filterInventory(String query) {
     setState(() {
       if (query.isEmpty) {
-        _filteredInventory = List.from(inventory);
+        filteredInventory = List.from(inventory);
       } else {
-        _filteredInventory = inventory
+        filteredInventory = inventory
             .where((item) =>
                 item["name"].toLowerCase().contains(query.toLowerCase()))
             .toList();
@@ -286,14 +322,14 @@ class _InventoryPageState extends State<InventoryPage> {
     setState(() {
       // Find the item in the original inventory list
       int inventoryIndex = inventory.indexWhere(
-          (item) => item["name"] == _filteredInventory[index]["name"]);
+          (item) => item["name"] == filteredInventory[index]["name"]);
       if (inventoryIndex == -1) return; // Ensure item exists
 
       // Increment orderQty in the main inventory list
       inventory[inventoryIndex]["orderQty"]++;
 
-      // Also update _filteredInventory to reflect changes immediately
-      _filteredInventory[index]["orderQty"] =
+      // Also update filteredInventory to reflect changes immediately
+      filteredInventory[index]["orderQty"] =
           inventory[inventoryIndex]["orderQty"];
 
       // Refresh UI
@@ -308,7 +344,7 @@ class _InventoryPageState extends State<InventoryPage> {
       if (inventory[index]["quantity"] + inventory[index]["orderQty"] > 0) {
         // Find the item in the original inventory list
         int inventoryIndex = inventory.indexWhere(
-            (item) => item["name"] == _filteredInventory[index]["name"]);
+            (item) => item["name"] == filteredInventory[index]["name"]);
         if (inventoryIndex == -1) return; // Ensure item exists
 
         // Decrement orderQty in the main inventory list (prevent negative values)
@@ -316,8 +352,8 @@ class _InventoryPageState extends State<InventoryPage> {
         inventory[inventoryIndex]["orderQty"]--;
         // }
 
-        // Also update _filteredInventory to reflect changes immediately
-        _filteredInventory[index]["orderQty"] =
+        // Also update filteredInventory to reflect changes immediately
+        filteredInventory[index]["orderQty"] =
             inventory[inventoryIndex]["orderQty"];
 
         // Refresh UI
@@ -350,15 +386,15 @@ class _InventoryPageState extends State<InventoryPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text(_filteredInventory[index]["name"]),
+          title: Text(filteredInventory[index]["name"]),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Stock: ${_filteredInventory[index]["quantity"]}"),
-              Text("Unit: ${_filteredInventory[index]["unit"] ?? 'N/A'}"),
+              Text("Stock: ${filteredInventory[index]["quantity"]}"),
+              Text("Unit: ${filteredInventory[index]["unit"] ?? 'N/A'}"),
               Text(
-                  "Price per unit: \$${_filteredInventory[index]["price"]?.toStringAsFixed(2) ?? 'N/A'}"),
+                  "Price per unit: \$${filteredInventory[index]["price"]?.toStringAsFixed(2) ?? 'N/A'}"),
             ],
           ),
           actions: [
@@ -451,8 +487,8 @@ class _InventoryPageState extends State<InventoryPage> {
 
   void _editItem(int index) {
 // Find the actual index in the main inventory list
-    int inventoryIndex = inventory.indexWhere(
-        (item) => item["name"] == _filteredInventory[index]["name"]);
+    int inventoryIndex = inventory
+        .indexWhere((item) => item["name"] == filteredInventory[index]["name"]);
 
     if (inventoryIndex == -1) return; // Ensure item exists in main inventory
 
@@ -539,6 +575,7 @@ class _InventoryPageState extends State<InventoryPage> {
                 onChanged: _filterInventory,
               )
             : const Text('Inventory'),
+        iconTheme: IconThemeData(color: Colors.white),
         actions: [
           IconButton(
             icon: Icon(_isSearching ? Icons.close : Icons.search),
@@ -572,9 +609,47 @@ class _InventoryPageState extends State<InventoryPage> {
       // Displays all of the raw materials we currently have in stock, as well +- buttons for ordering raw materials
       body: Column(
         children: [
+          // Toggle Button Row
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                  onPressed: () => _switchInventory("ingredients"),
+                  child: Text(
+                    "Ingredients",
+                    style: TextStyle(
+                      fontWeight: currInventory == "ingredients"
+                          ? FontWeight.bold
+                          : FontWeight.normal,
+                      color: currInventory == "ingredients"
+                          ? Colors.black
+                          : Colors.grey,
+                    ),
+                  ),
+                ),
+                const Text(" | "), // Divider between buttons
+                TextButton(
+                  onPressed: () => _switchInventory("products"),
+                  child: Text(
+                    "Products",
+                    style: TextStyle(
+                      fontWeight: currInventory == "products"
+                          ? FontWeight.bold
+                          : FontWeight.normal,
+                      color: currInventory == "products"
+                          ? Colors.black
+                          : Colors.grey,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
           Expanded(
             child: ListView.builder(
-              itemCount: _filteredInventory.length,
+              itemCount: filteredInventory.length,
               itemBuilder: (context, index) {
                 return Card(
                   margin:
@@ -589,7 +664,7 @@ class _InventoryPageState extends State<InventoryPage> {
                           padding: const EdgeInsets.only(
                               right: 12.0), // Adds right padding
                           child: Icon(
-                            _filteredInventory[index]["icon"],
+                            filteredInventory[index]["icon"],
                             size: 40,
                             color: Colors.brown,
                           ),
@@ -604,7 +679,7 @@ class _InventoryPageState extends State<InventoryPage> {
                                 alignment:
                                     Alignment.centerLeft, // Left-aligns text
                                 child: Text(
-                                  _filteredInventory[index]["name"],
+                                  filteredInventory[index]["name"],
                                   style: const TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold),
@@ -615,7 +690,7 @@ class _InventoryPageState extends State<InventoryPage> {
                               Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  "${_filteredInventory[index]["quantity"]} ${_filteredInventory[index]["unit"] ?? ''}",
+                                  "${filteredInventory[index]["quantity"]} ${filteredInventory[index]["unit"] ?? ''}",
                                   style: const TextStyle(fontSize: 14),
                                   textAlign: TextAlign.left,
                                 ),
@@ -627,22 +702,24 @@ class _InventoryPageState extends State<InventoryPage> {
                         Row(
                           children: [
                             // minus button that decrements order quantity
-                            IconButton(
-                              icon: const Icon(Icons.remove,
-                                  color: Color(0xFFc75c5c)),
-                              onPressed: () => _decrementOrder(index),
-                            ),
+                            if (currInventory == "products") ...[
+                              IconButton(
+                                icon: const Icon(Icons.remove,
+                                    color: Color(0xFFc75c5c)),
+                                onPressed: () => _decrementOrder(index),
+                              ),
 
-                            // Displays the order quantity
-                            Text("${inventory[index]['orderQty']}",
-                                style: const TextStyle(fontSize: 16)),
+                              // Displays the order quantity
+                              Text("${inventory[index]['orderQty']}",
+                                  style: const TextStyle(fontSize: 16)),
 
-                            // plus button that increments the order quantity
-                            IconButton(
-                              icon: const Icon(Icons.add,
-                                  color: Color(0xFF5f967c)),
-                              onPressed: () => _incrementOrder(index),
-                            ),
+                              // plus button that increments the order quantity
+                              IconButton(
+                                icon: const Icon(Icons.add,
+                                    color: Color(0xFF5f967c)),
+                                onPressed: () => _incrementOrder(index),
+                              ),
+                            ],
                           ],
                         ),
 
