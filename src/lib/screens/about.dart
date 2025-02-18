@@ -14,7 +14,7 @@ class AboutPage extends StatelessWidget {
           'About Simple Bakery',
           style: GoogleFonts.lora(fontWeight: FontWeight.bold),
         ),
-        backgroundColor: Colors.brown,
+        backgroundColor: Color(0xFF7B421D),
       ),
       drawer: AppDrawer(currPage: Text("about")),
       body: SingleChildScrollView(

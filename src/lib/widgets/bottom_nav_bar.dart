@@ -7,7 +7,7 @@ class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
-        color: Color(0xFF4E3D32),
+        color: Color(0xFF7B421D),
         shape: null,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
