@@ -346,9 +346,6 @@ class _InventoryPageState extends State<InventoryPage> {
       // Also update filteredInventory to reflect changes immediately
       filteredInventory[index]["orderQty"] =
           inventory[inventoryIndex]["orderQty"];
-
-      // Refresh UI
-      _filterInventory(_searchController.text);
     });
   }
 
@@ -370,9 +367,6 @@ class _InventoryPageState extends State<InventoryPage> {
         // Also update filteredInventory to reflect changes immediately
         filteredInventory[index]["orderQty"] =
             inventory[inventoryIndex]["orderQty"];
-
-        // Refresh UI
-        _filterInventory(_searchController.text);
       }
     });
   }
@@ -487,7 +481,6 @@ class _InventoryPageState extends State<InventoryPage> {
                           .local_grocery_store, // Default broad category icon
                       "orderQty": 0,
                     });
-                    _filterInventory(_searchController.text);
                   });
                   Navigator.pop(context);
                 }
@@ -557,9 +550,6 @@ class _InventoryPageState extends State<InventoryPage> {
                   inventory[inventoryIndex]["price"] =
                       double.tryParse(priceController.text) ??
                           inventory[inventoryIndex]["price"];
-
-                  // Re-filter the inventory so the updated item appears correctly
-                  _filterInventory(_searchController.text);
                 });
 
                 Navigator.pop(context);
@@ -740,7 +730,7 @@ class _InventoryPageState extends State<InventoryPage> {
                               ),
 
                               // Displays the order quantity
-                              Text("${inventory[index]['orderQty']}",
+                              Text("${filteredInventory[index]['orderQty']}",
                                   style: const TextStyle(fontSize: 16)),
 
                               // plus button that increments the order quantity
