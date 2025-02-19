@@ -125,20 +125,13 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFE3CCB0),
       appBar: AppBar(title: Text('Welcome'),
       iconTheme: IconThemeData(color: Colors.white),
       ),
       drawer: AppDrawer(currPage: Text('login')),
       body: Stack(
         children: [
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/gpt-generated-branding.png'),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
           Center(
             child: Container(
               padding: const EdgeInsets.all(20),

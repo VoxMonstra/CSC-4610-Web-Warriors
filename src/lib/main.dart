@@ -59,7 +59,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFF5f967c),
+          backgroundColor: Color(0xFF4E3D32),
           titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
         ),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
