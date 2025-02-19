@@ -63,6 +63,7 @@ class BakeryShop extends StatelessWidget {
       // Title
       appBar: AppBar(
           title: Text('Bakery Shop'),
+          backgroundColor: Color(0xFF7B421D),
           iconTheme: IconThemeData(color: Colors.white),
           actions: [
             // Shopping cart button in the top right of the menu screen that goes to the cart screen when clicked.
@@ -73,10 +74,9 @@ class BakeryShop extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => CartScreen()),
               ),
             )
-          ]
-        ),
+          ]),
 
-        backgroundColor: Color(0xFFE3CCB0), // Light brown background
+      backgroundColor: Color(0xFFE3CCB0), // Light brown background
 
       // Lists all of the consumer products with button to add item to cart when pushed
       body: GridView.builder(
@@ -119,9 +119,15 @@ class BakeryShop extends StatelessWidget {
                           onPressed: () {
                             final cart = context.read<CartProvider>();
                             cart.addItem(item);
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            ScaffoldMessenger.of(context)
+                            ..hideCurrentSnackBar()
+                            ..showSnackBar(
+                              SnackBar(
                                 content:
-                                    Text('Added ' + item.name + ' to cart')));
+                                    Text('Added ' + item.name + ' to cart'),
+                                    duration: Duration(seconds: 1),
+                              ),
+                            );
                           },
                         ),
                       ),
@@ -143,7 +149,11 @@ class CartScreen extends StatelessWidget {
     final cart = context.watch<CartProvider>();
     return Scaffold(
       // Title
-      appBar: AppBar(title: Text('Your Cart')),
+      appBar: AppBar(
+        title: Text('Your Cart'),
+        backgroundColor: Color(0xFF7B421D),
+      ),
+      backgroundColor: Color(0xFFE3CCB0), // Light brown background
 
       // Displays everything that has been added to the cart, or "Your cart is empty" if the cart is empty
       body: cart.cart.isEmpty //boolean condition
@@ -176,7 +186,7 @@ class CartScreen extends StatelessWidget {
 
                 // Bottom section to include total price of all cart items and checkout button
                 Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(14.0),
                   child: Column(
                     children: [
                       // Displays the total cost of everything in the cart

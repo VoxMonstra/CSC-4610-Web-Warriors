@@ -10,7 +10,7 @@ class HomePage extends StatelessWidget {
       backgroundColor: Color(0xFFE3CCB0), // Light brown background
       appBar: AppBar(
         title: Text('Home'),
-        backgroundColor: Color(0xFF4E3D32),
+        backgroundColor: Color(0xFF7B421D),
         iconTheme: IconThemeData(color: Colors.white),
         actions: [
           IconButton(

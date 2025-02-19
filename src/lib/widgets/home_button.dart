@@ -7,7 +7,7 @@ class HomeButton extends StatelessWidget {
       onPressed: () {
         Navigator.pushNamed(context, '/home');
       },
-      backgroundColor: Color(0xFF6B835C),
+      backgroundColor: Color.fromARGB(255, 54, 129, 7),
       shape: CircleBorder(),
         child: Image.asset(
           'assets/newlogoTransparent.png',
