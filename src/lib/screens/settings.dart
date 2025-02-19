@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:src/services/auth_service.dart';
 import 'account_settings.dart';
 import 'preferences.dart';
 import 'profile_settings.dart';
@@ -139,11 +140,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
           content: const Text("Are you sure you want to logout?"),
           actions: [
             TextButton(
-              onPressed: () => Navigator.pop(context),
+              onPressed: () {
+                Navigator.pop(context);
+              },
               child: const Text("Cancel"),
             ),
             TextButton(
-              onPressed: () {
+              onPressed: () async {
+                print("Logout button pressed");
+                await AuthService().logout();
                 Navigator.pop(context);
                 Navigator.pushReplacementNamed(context, '/login');
               },

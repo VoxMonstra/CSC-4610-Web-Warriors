@@ -18,6 +18,13 @@ class AuthService {
   //(Clears Token)
   Future<void> logout() async {
     await _storage.delete(key: 'access_token');
+    print('Token deleted');
+  }
+
+  //Check if user is logged in
+  Future<bool> isLoggedIn() async {
+    String? token = await _storage.read(key: 'access_token');
+    return token != null;
   }
   
   Future<http.Response> authenticatedRequest(
@@ -55,7 +62,7 @@ class AuthService {
       return response;
     }
 
-    Future<bool> loginUser(BuildContext context, String email, String password) async {
+    Future<String?> loginUser(BuildContext context, String email, String password) async {
       try {
         final response = await http.post(
          Uri.parse('$apiUrl/login'),
@@ -70,14 +77,17 @@ class AuthService {
         final data = jsonDecode(response.body);
         final token = data['token']; //response should contain a token
         await storeToken(token); //store
-        print(token);
-        return true;
+        print('token stored: $token');
+        return token;
+      } else if (response.statusCode == 403) {
+        await logout();
+        throw Exception("Session Expired. Please log in again.");
       } else {
         throw Exception('Login failed: ${response.body}');
       }
     } catch (e) {
       print("Error during login: $e");
-      return false;
+      return null;
     } 
   }
 

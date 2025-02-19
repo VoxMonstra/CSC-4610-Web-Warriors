@@ -91,11 +91,17 @@ class _LoginState extends State<Login> {
           passwordController.text.trim(),
           );
 
-        if(response) {
+        if(response != null) {
+          await _authService.storeToken(response);
           setState(() => message = "Login Successful");
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text("Login Successful")),
-            
+          );
+          Navigator.pushReplacementNamed(context, '/home');
+        } else{
+          setState(() => message = "Login Failed");
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("Login Failed. Please check your credentials.")),
           );
         }
       } catch(e) {  // Handle exception
@@ -245,22 +251,24 @@ class _LoginState extends State<Login> {
                       : ElevatedButton(
                           onPressed: () async {
                             if (userHasAccount) {
-                              bool response = await AuthService().loginUser(
+                              String? token = await AuthService().loginUser(
                                 context, 
                                 emailController.text.trim(),
                                 passwordController.text.trim(),
                               );
+                              print('Token recieved: $token');
+                            if (token != null) {
+                              Navigator.pushReplacementNamed(context, '/home');
 
-                          if(!response) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('Login failed. Please check your credentials.')),
-                            );
-                          } else {
-                            Navigator.pushReplacementNamed(context, '/home');
-                          }
                             } else {
-                              await registerUser();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("Login Failed. Please check your credentials.")),
+                              );
                             }
+                          }
+                            else {
+                              await registerUser();
+                            } 
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFFDC8515),
