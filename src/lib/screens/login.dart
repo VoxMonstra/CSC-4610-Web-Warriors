@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'home.dart';
 import '../widgets/drawer.dart';
 import 'package:http/http.dart' as http; // Import for making HTP requests
+import '../services/auth_service.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key}); // Login widget constructor
@@ -15,7 +16,7 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   bool userHasAccount = true; // Preston: determines whether the app will show the 'login' screen or 'register' form
   bool isLoading = false; //track loading state
-
+  String message ='';
   // Controllers for text input fields
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -24,15 +25,17 @@ class _LoginState extends State<Login> {
   final TextEditingController confirmPasswordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>(); // key for form validation
 
-  String message ='';
+  final AuthService _authService = AuthService(); //Initialize AuthService
 
   // API URL
-  final String apiUrl = 'https://simplybakery-dev.duckdns.org/api';
+ // final String apiUrl = 'https://simplybakery-dev.duckdns.org/api';
 
   // function for registering an account
   Future<void> registerUser() async {
     if (!_formKey.currentState!.validate()) return; // Validates the form fields, and return if they are not valid
 
+      String firstName = firstNameController.text.trim();
+      String lastName = lastNameController.text.trim();
       String email = emailController.text.trim();
       String password = passwordController.text.trim();
       String confirmPassword = confirmPasswordController.text.trim();
@@ -49,34 +52,26 @@ class _LoginState extends State<Login> {
 
       // HTTP POST request to register a new user
       try {
-        final response = await http.post(
-          Uri.parse('$apiUrl/register'), // Parse the registration URL
-          headers: {"Content-Type": "application/json"}, // Set the request headers
-          body: jsonEncode({
-            "email": email, // Include email in the request body
-            "password": password, // Include password in the request body
-            "first_name": firstNameController.text.trim(), // Include first trimmed name in the request body
-            "last_name": lastNameController.text.trim(), // Include trimmed last name in the request body
-         }),
+        final response = await _authService.registerUser(
+          context,
+          email,
+          password,
+          firstName,
+          lastName,
         );
 
-        final data = jsonDecode(response.body); // Decode the JSON response body
-
-        if (response.statusCode == 201) { // Handle successful registration
+        if (response) {
           setState(() => message = "User Registered Successfully!");
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text("Registration successful for $email")),
           );
           setState(() => userHasAccount = true);
-        } else { // Handle failed registration
-          setState(() => message = data['message']);
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Registration failed: ${data['message']}")),
-          );
         }
       } catch (e) { // Handle exception
+        print("Error during registration: $e");
+        setState(() => message = e.toString());
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("An error occurred: $e")),
+          SnackBar(content: Text("An error occurred: $message")),
         );
       } finally {
         setState(() => isLoading = false); // Reset loading state
@@ -90,34 +85,29 @@ class _LoginState extends State<Login> {
       setState(() => isLoading = true); // Sets loading state to true
 
       try {
-        final response = await http.post(
-          Uri.parse('$apiUrl/login'), // Parse the login URL
-          headers: {"Content-Type": "application/json"}, // Set the request headers
-          body: jsonEncode({
-            "email": emailController.text.trim(), // Include trimmed email in the request body
-            "password": passwordController.text.trim(), // Include trimmed password in the request body
-          }),
-        );
-
-        final data = jsonDecode(response.body); // Decode the JSON response body
-
-        // print('Response body: $data');
-
-        if (response.statusCode == 200) { // Handle successful login
-          setState(() => message = "Login Successful:");
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Login Successful!")),
+        final response = await _authService.loginUser(
+          context,
+          emailController.text.trim(),
+          passwordController.text.trim(),
           );
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
-        } else { // Handle failed login
-          setState(() => message = data['message']);
+
+        if(response != null) {
+          await _authService.storeToken(response);
+          setState(() => message = "Login Successful");
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Login Failed: ${data['message']}")),
+            SnackBar(content: Text("Login Successful")),
+          );
+          Navigator.pushReplacementNamed(context, '/home');
+        } else{
+          setState(() => message = "Login Failed");
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("Login Failed. Please check your credentials.")),
           );
         }
       } catch(e) {  // Handle exception
+        setState(() => message = e.toString());
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("An error occurred: $e")),
+          SnackBar(content: Text("An error occurred: $message")),
         );
       } finally {
         setState(() => isLoading = false); // Reset loading state
@@ -132,22 +122,16 @@ class _LoginState extends State<Login> {
       confirmPasswordController.dispose();
       super.dispose();
     }
-     @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFE3CCB0),
       appBar: AppBar(title: Text('Welcome'),
+      iconTheme: IconThemeData(color: Colors.white),
       ),
       drawer: AppDrawer(currPage: Text('login')),
       body: Stack(
         children: [
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/gpt-generated-branding.png'),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
           Center(
             child: Container(
               padding: const EdgeInsets.all(20),
@@ -258,7 +242,57 @@ class _LoginState extends State<Login> {
                     isLoading
                       ? const CircularProgressIndicator()
                       : ElevatedButton(
-                          onPressed: userHasAccount ? loginUser : registerUser,
+                          onPressed: () async {
+                            if (userHasAccount) {
+                              String? token = await AuthService().loginUser(
+                                context, 
+                                emailController.text.trim(),
+                                passwordController.text.trim(),
+                              );
+                              print('Token recieved: $token');
+                            if (token != null) {
+                              Navigator.pushReplacementNamed(context, '/home');
+
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("Login Failed. Please check your credentials.")),
+                              );
+                            }
+                          }
+                            else {
+                              await registerUser();
+                            } 
+                        },
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFFDC8515),
+                            foregroundColor: Colors.white,
+                            shadowColor: const Color(0xFF343330),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6.0)),
+                            elevation: 5,
+                          ),
+                          child: Text(userHasAccount ? 'Login' : 'Register'),
+                        ),
+                    const SizedBox(height: 10),
+                    TextButton(
+                      onPressed: () {
+                        setState(() => userHasAccount = !userHasAccount);
+                      },
+                      child: Text(userHasAccount
+                        ? "Create a new account"
+                        : "Sign in with existing account"),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+              /*        }
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFFDC8515),
                             foregroundColor: Colors.white,
@@ -288,7 +322,7 @@ class _LoginState extends State<Login> {
   }
 }
   
-    /* final String apiUrl = 'https://simplybakery-dev.duckdns.org/api/register';
+     final String apiUrl = 'https://simplybakery-dev.duckdns.org/api/register';
     final response = await http.post(
       Uri.parse(apiUrl),
       headers: {"Content-Type": "application/json"},

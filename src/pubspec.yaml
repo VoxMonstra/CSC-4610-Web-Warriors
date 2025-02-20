@@ -18,6 +18,8 @@ dependencies:
   google_fonts: ^6.2.1
   http: ^1.3.0
   provider: ^6.1.2
+  jwt_decoder: ^2.0.1
+  flutter_secure_storage: ^9.0.0
 
 dev_dependencies:
   flutter_test:
@@ -27,8 +29,19 @@ dev_dependencies:
 
 flutter:
   assets:
+    - assets/Sourdough Bread.jpg
+    - assets/Baguettes.jpg
+    - assets/Ciabatta.jpg
+    - assets/Croissants.jpg
+    - assets/Muffins.jpg
+    - assets/Scones.jpg
+    - assets/Cookies.jpg
+    - assets/Brownies & Blondies.jpg
+    - assets/Cinnamon Rolls.jpg
+    - assets/Specialty Cakes.jpg
     - assets/gpt-generated-branding.png
     - assets/profile_picture.png
+    - assets/newlogoTransparent.png
 
   uses-material-design: true
 
