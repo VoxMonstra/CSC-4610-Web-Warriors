@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:src/services/auth_service.dart';
 import './screens/settings.dart';
 import './screens/login.dart';
 import './screens/about.dart';
@@ -11,9 +12,11 @@ import './screens/menu.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   ThemeMode themeMode = await _loadTheme();
+  AuthService authService = AuthService();
+  bool loggedIn = await authService.isLoggedIn();
   runApp(ChangeNotifierProvider(
     create: (context) => CartProvider(),
-    child: MyApp(initialThemeMode: themeMode),
+    child: MyApp(initialThemeMode: themeMode, loggedIn: loggedIn),
   ));
 }
 
@@ -25,7 +28,8 @@ Future<ThemeMode> _loadTheme() async {
 
 class MyApp extends StatefulWidget {
   final ThemeMode initialThemeMode;
-  const MyApp({super.key, required this.initialThemeMode});
+  final bool loggedIn;
+  const MyApp({super.key, required this.initialThemeMode, required this.loggedIn});
 
   @override
   _MyAppState createState() => _MyAppState();
@@ -55,7 +59,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFF5f967c),
+          backgroundColor: Color(0xFF7B421D),
           titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
         ),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
@@ -63,7 +67,7 @@ class _MyAppState extends State<MyApp> {
       ),
       darkTheme: ThemeData.dark(),
       themeMode: _themeMode,
-      initialRoute: '/home',
+      initialRoute: widget.loggedIn ? '/home' : '/login',
       routes: {
         '/login': (context) => Login(),
         '/home': (context) => HomePage(),

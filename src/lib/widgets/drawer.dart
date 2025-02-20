@@ -7,11 +7,12 @@ class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: Color(0xFFE3CCB0),
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
           DrawerHeader(
-            decoration: BoxDecoration(color: Colors.blue),
+            decoration: BoxDecoration(color: Color(0xFF7B421D)),
             child: Text(
               'Menu',
               style: TextStyle(color: Colors.white, fontSize: 24),
