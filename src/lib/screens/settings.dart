@@ -73,14 +73,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           },
                         ),
                         ListTile(
-                          title: const Text('Dark Mode'),
+                          title: const Text('Dark Mode',
+                          ),
                           onTap: () {
                             _changeTheme(ThemeMode.dark);
                             Navigator.pop(context);
                           },
                         ),
                         ListTile(
-                          title: const Text('System Default'),
+                          title: const Text('System Default',
+                          ),
                           onTap: () {
                             _changeTheme(ThemeMode.system);
                             Navigator.pop(context);

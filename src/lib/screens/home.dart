@@ -82,7 +82,7 @@ class HomePage extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(
-                          'Order',
+                          'Products',
                           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                                 color: Colors.black,
                               ),
