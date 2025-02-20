@@ -129,4 +129,28 @@ class AuthService {
     return false;
     }
   } 
+
+  Future<Map<String, dynamic>?> fetchUserData() async {
+    try {
+      String? token = await getToken();
+      if (token == null) return null;
+
+      final response = await http.get(
+        Uri.parse('$apiUrl/users'),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
+        },
+      );
+
+      if (response.statusCode == 200) {
+        return jsonDecode(response.body);
+      } else {
+        throw Exception('Failed to load user: ${response.body}');
+      }
+    } catch (e) {
+      print('Error loading user: $e');
+      return {};
+    }
+  }
 }
