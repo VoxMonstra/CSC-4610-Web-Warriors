@@ -79,63 +79,75 @@ class BakeryShop extends StatelessWidget {
       backgroundColor: Color(0xFFE3CCB0), // Light brown background
 
       // Lists all of the consumer products with button to add item to cart when pushed
-      body: GridView.builder(
-        padding: EdgeInsets.all(10),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          childAspectRatio: 2 / 3,
-        ),
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          final item = items[index];
-          return Card(
-            color: Color(0xFFF5E6D3),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/${item.name}.jpg'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(item.name),
-                      Text('\$${item.price.toStringAsFixed(2)}'),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: IconButton(
-                          icon: Icon(Icons.add_shopping_cart),
-                          onPressed: () {
-                            final cart = context.read<CartProvider>();
-                            cart.addItem(item);
-                            ScaffoldMessenger.of(context)
-                            ..hideCurrentSnackBar()
-                            ..showSnackBar(
-                              SnackBar(
-                                content:
-                                    Text('Added ' + item.name + ' to cart'),
-                                    duration: Duration(seconds: 1),
-                              ),
-                            );
-                          },
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          //int crossAxisCount = constraints.maxWidth > 300 ? 3 : 2;
+          return GridView.builder(
+            padding: EdgeInsets.all(10),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+              childAspectRatio: 2 / 3,
+            ),
+            itemCount: items.length,
+            itemBuilder: (context, index) {
+              final item = items[index];
+              return Card(
+                color: Color(0xFFF5E6D3),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('assets/${item.name}.jpg'),
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            item.name,
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            '\$${item.price.toStringAsFixed(2)}',
+                            style: TextStyle(fontSize: 14, color: Colors.grey),
+                          ),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: IconButton(
+                              icon: Icon(Icons.add_shopping_cart),
+                              onPressed: () {
+                                final cart = context.read<CartProvider>();
+                                cart.addItem(item);
+                                ScaffoldMessenger.of(context)
+                                  ..hideCurrentSnackBar()
+                                  ..showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                          'Added ' + item.name + ' to cart'),
+                                      duration: Duration(seconds: 1),
+                                    ),
+                                  );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              );
+            },
           );
         },
       ),
