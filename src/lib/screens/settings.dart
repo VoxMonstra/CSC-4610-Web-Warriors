@@ -32,7 +32,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       appBar: AppBar(
         title: const Text('Settings'),
         iconTheme: const IconThemeData(color: Colors.black),
-        backgroundColor: Color(0xFF4E3D32),
+        backgroundColor: Color(0xFF7B421D),
       ),
       drawer: AppDrawer(currPage: const Text("settings")),
       body: Container(
