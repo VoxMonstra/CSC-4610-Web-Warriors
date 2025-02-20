@@ -561,6 +561,7 @@ class _InventoryPageState extends State<InventoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       // Title
+      backgroundColor: Color(0xFFE3CCB0),
       appBar: AppBar(
         title: _isSearching
             ? TextField(
@@ -652,6 +653,7 @@ class _InventoryPageState extends State<InventoryPage> {
               itemCount: filteredInventory.length,
               itemBuilder: (context, index) {
                 return Card(
+                  color: Color(0xFFF5E6D3),
                   margin:
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                   child: Padding(
