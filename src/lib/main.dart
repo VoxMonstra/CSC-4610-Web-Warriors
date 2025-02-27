@@ -8,6 +8,7 @@ import './screens/about.dart';
 import './screens/inventory.dart' as inv; // Alias to avoid conflicts
 import './screens/home.dart';
 import './screens/menu.dart';
+import './screens/expenses.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -76,6 +77,7 @@ class _MyAppState extends State<MyApp> {
             .InventoryPage(), // Use alias since it literally won't work without it
         '/about': (context) => AboutPage(),
         '/menu': (context) => BakeryShop(),
+        '/expenses': (context) => ExpensesPage(),
       },
     );
   }
