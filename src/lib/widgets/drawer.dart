@@ -30,13 +30,23 @@ class AppDrawer extends StatelessWidget {
               },
             ),
 
-            if (currPage.data != "menu")
+          if (currPage.data != "menu")
             ListTile(
               leading: Icon(Icons.receipt, color: Colors.black),
               textColor: Colors.black,
               title: Text('Order'),
               onTap: () {
                 Navigator.pushNamed(context, '/menu');
+              },
+            ),
+          
+          if (currPage.data != "Expenses")
+            ListTile(
+              leading: Icon(Icons.attach_money_outlined, color: Colors.black),
+              textColor: Colors.black,
+              title: Text('Expenses'),
+              onTap: () {
+                Navigator.pushNamed(context, '/expenses');
               },
             ),
 
