@@ -30,7 +30,7 @@ class AppDrawer extends StatelessWidget {
               },
             ),
 
-            if (currPage.data != "menu")
+          if (currPage.data != "menu")
             ListTile(
               leading: Icon(Icons.receipt, color: Colors.black),
               textColor: Colors.black,
@@ -51,25 +51,35 @@ class AppDrawer extends StatelessWidget {
               },
             ),
 
-            if (currPage.data != "inventory")
-              ListTile(
-                leading: Icon(Icons.inventory, color: Colors.black),
-                textColor: Colors.black,
-                title: Text('Inventory'),
-                onTap: () {
-                  Navigator.pushNamed(context, '/inventory');
-                },
-              ),
+          if (currPage.data != "inventory")
+            ListTile(
+              leading: Icon(Icons.inventory, color: Colors.black),
+              textColor: Colors.black,
+              title: Text('Inventory'),
+              onTap: () {
+                Navigator.pushNamed(context, '/inventory');
+              },
+            ),
 
-            if (currPage.data != "about")
-              ListTile(
-                leading: Icon(Icons.info, color: Colors.black),
-                textColor: Colors.black,
-                title: Text('About'),
-                onTap: () {
-                  Navigator.pushNamed(context, '/about');
-                },
-              ),
+          if (currPage.data != "recipes")
+            ListTile(
+              leading: Icon(Icons.inventory, color: Colors.black),
+              textColor: Colors.black,
+              title: Text('Recipes'),
+              onTap: () {
+                Navigator.pushNamed(context, '/recipes');
+              },
+            ),
+
+          if (currPage.data != "about")
+            ListTile(
+              leading: Icon(Icons.info, color: Colors.black),
+              textColor: Colors.black,
+              title: Text('About'),
+              onTap: () {
+                Navigator.pushNamed(context, '/about');
+              },
+            ),
 
           // Login button
           if (currPage.data != "login")
