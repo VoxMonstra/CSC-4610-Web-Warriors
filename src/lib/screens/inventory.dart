@@ -594,16 +594,18 @@ class _InventoryPageState extends State<InventoryPage> {
   double _getTabPosition(double screenwidth) {
     int tabCount = 4; // Number of tabs
     double tabWidth = screenwidth / tabCount;
+    double firstTabPosition = 0;
 
     switch (currInventory) {
       case "ingredients":
-        return tabWidth * 1;
+      //return 0;
+        return ((screenwidth - 407) / 2);
       case "products":
-        return tabWidth * 1;
+        return ((screenwidth - 407) / 2) + 97;
       case "damages":
-        return tabWidth * 2;
+        return ((screenwidth - 407) / 2) + 194;
       case "log":
-        return tabWidth * 3;
+        return ((screenwidth - 407) / 2) + 291;
       default:
         return 0;
     }
