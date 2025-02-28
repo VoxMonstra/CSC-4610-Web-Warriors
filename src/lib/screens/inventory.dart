@@ -591,8 +591,27 @@ class _InventoryPageState extends State<InventoryPage> {
     );
   }
 
+  double _getTabPosition(double screenwidth) {
+    int tabCount = 4; // Number of tabs
+    double tabWidth = screenwidth / tabCount;
+
+    switch (currInventory) {
+      case "ingredients":
+        return tabWidth * 1;
+      case "products":
+        return tabWidth * 1;
+      case "damages":
+        return tabWidth * 2;
+      case "log":
+        return tabWidth * 3;
+      default:
+        return 0;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       // Title
       appBar: AppBar(
@@ -639,6 +658,7 @@ class _InventoryPageState extends State<InventoryPage> {
 
       // Sidebar
       drawer: AppDrawer(currPage: Text("inventory")),
+      backgroundColor: Color(0xFFE3CCB0), // Light brown background
 
       // Displays all of the raw materials we currently have in stock, as well +- buttons for ordering raw materials
       body: Column(
@@ -648,70 +668,95 @@ class _InventoryPageState extends State<InventoryPage> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                // Toggle Buttons
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    TextButton(
-                      onPressed: () => _switchInventory("ingredients"),
-                      child: Text(
-                        "Ingredients",
-                        style: TextStyle(
-                          fontWeight: currInventory == "ingredients"
-                              ? FontWeight.bold
-                              : FontWeight.normal,
-                          color: currInventory == "ingredients"
-                              ? Colors.black
-                              : Colors.grey,
+                // Toggle Buttons Card
+                Card(
+                  color: Color(0xFFF5E6D3),
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  child: Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: Stack(
+                      children: [
+                        AnimatedPositioned(
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                          left: _getTabPosition(screenWidth),
+                          child: Container(
+                            width: 80,
+                            height: 5,
+                            decoration: BoxDecoration(
+                              color: Color.fromARGB(255, 54, 129, 7),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                    const Text(" | "),
-                    TextButton(
-                      onPressed: () => _switchInventory("products"),
-                      child: Text(
-                        "Products",
-                        style: TextStyle(
-                          fontWeight: currInventory == "products"
-                              ? FontWeight.bold
-                              : FontWeight.normal,
-                          color: currInventory == "products"
-                              ? Colors.black
-                              : Colors.grey,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TextButton(
+                              onPressed: () => _switchInventory("ingredients"),
+                              child: Text(
+                                "Ingredients",
+                                style: TextStyle(
+                                  fontWeight: currInventory == "ingredients"
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
+                                  color: currInventory == "ingredients"
+                                      ? Colors.black
+                                      : Colors.grey,
+                                ),
+                              ),
+                            ),
+                            const Text(" | "),
+                            TextButton(
+                              onPressed: () => _switchInventory("products"),
+                              child: Text(
+                                "Products",
+                                style: TextStyle(
+                                  fontWeight: currInventory == "products"
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
+                                  color: currInventory == "products"
+                                      ? Colors.black
+                                      : Colors.grey,
+                                ),
+                              ),
+                            ),
+                            const Text(" | "),
+                            TextButton(
+                              onPressed: () => _switchInventory("damages"),
+                              child: Text(
+                                "Damages",
+                                style: TextStyle(
+                                  fontWeight: currInventory == "damages"
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
+                                  color: currInventory == "damages"
+                                      ? Colors.black
+                                      : Colors.grey,
+                                ),
+                              ),
+                            ),
+                            const Text(" | "),
+                            TextButton(
+                              onPressed: () => _switchInventory("log"),
+                              child: Text(
+                                "Log",
+                                style: TextStyle(
+                                  fontWeight: currInventory == "log"
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
+                                  color: currInventory == "log"
+                                      ? Colors.black
+                                      : Colors.grey,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
+                      ],
                     ),
-                    const Text(" | "),
-                    TextButton(
-                      onPressed: () => _switchInventory("damages"),
-                      child: Text(
-                        "Damages",
-                        style: TextStyle(
-                          fontWeight: currInventory == "damages"
-                              ? FontWeight.bold
-                              : FontWeight.normal,
-                          color: currInventory == "damages"
-                              ? Colors.black
-                              : Colors.grey,
-                        ),
-                      ),
-                    ),
-                    const Text(" | "),
-                    TextButton(
-                      onPressed: () => _switchInventory("log"),
-                      child: Text(
-                        "Log",
-                        style: TextStyle(
-                          fontWeight: currInventory == "log"
-                              ? FontWeight.bold
-                              : FontWeight.normal,
-                          color: currInventory == "log"
-                              ? Colors.black
-                              : Colors.grey,
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
 
                 // Damage reason dropdown (only for "Damages" inventory)
@@ -748,6 +793,7 @@ class _InventoryPageState extends State<InventoryPage> {
               itemCount: filteredInventory.length,
               itemBuilder: (context, index) {
                 return Card(
+                  color: Color(0xFFF5E6D3),
                   margin:
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                   child: Padding(
