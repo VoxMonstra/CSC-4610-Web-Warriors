@@ -15,10 +15,11 @@ class _RecipesPageState extends State<RecipesPage> {
   List<Map<String, dynamic>> filteredRecipes = [];
   final List<Map<String, dynamic>> recipes = [
     {
-      "name": "All-purpose Flour",
-      "quantity": 20,
-      "unit": "kg",
-      "price": 1.50,
+      "name": "Muffin",
+      "ingredients": ["all-purpose flour", "eggs", "milk"],
+      "quantity": [20, 2, 1],
+      "unit": ["kg", "dozen", "litre"],
+      "price": [3.99, 2.99, 1.99],
       "icon": Icons.bakery_dining,
       "orderQty": 0
     }
@@ -56,10 +57,23 @@ class _RecipesPageState extends State<RecipesPage> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Stock: ${recipes[index]["quantity"]}"),
-              Text("Unit: ${recipes[index]["unit"] ?? 'N/A'}"),
-              Text(
-                  "Price per unit: \$${recipes[index]["price"]?.toStringAsFixed(2) ?? 'N/A'}"),
+              const Text("Ingredients:",
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              const SizedBox(height: 8), // Add spacing
+
+              // Generate a bullet list of ingredients
+              for (int i = 0; i < recipes[index]["quantity"].length; i++)
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("• "), // Bullet point
+                    Expanded(
+                      child: Text(
+                        '${recipes[index]["quantity"][i]} ${recipes[index]["unit"][i]} ${recipes[index]["ingredients"][i]}',
+                      ),
+                    ),
+                  ],
+                ),
             ],
           ),
           actions: [
@@ -80,74 +94,69 @@ class _RecipesPageState extends State<RecipesPage> {
     );
   }
 
-  bool _hasChanges() {
-    return recipes.any((item) =>
-        item["quantity"] + item["orderQty"] >= 0 && item["orderQty"] != 0);
-  }
+  // void _showAddItemDialog() {
+  //   String name = '';
+  //   int quantity = 1;
+  //   String unit = '';
+  //   double price = 0.0;
 
-  void _showAddItemDialog() {
-    String name = '';
-    int quantity = 1;
-    String unit = '';
-    double price = 0.0;
-
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text("Add new item"),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                decoration: const InputDecoration(labelText: "Item name"),
-                onChanged: (value) => name = value,
-              ),
-              TextField(
-                decoration: const InputDecoration(labelText: "Quantity"),
-                keyboardType: TextInputType.number,
-                onChanged: (value) => quantity = int.tryParse(value) ?? 1,
-              ),
-              TextField(
-                decoration: const InputDecoration(labelText: "Unit (metric)"),
-                onChanged: (value) => unit = value,
-              ),
-              TextField(
-                decoration: const InputDecoration(labelText: "Unit price"),
-                keyboardType: TextInputType.number,
-                onChanged: (value) => price = double.tryParse(value) ?? 0.0,
-              ),
-            ],
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text("Cancel"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                if (name.isNotEmpty && unit.isNotEmpty) {
-                  setState(() {
-                    recipes.add({
-                      "name": name,
-                      "quantity": quantity,
-                      "unit": unit,
-                      "price": price,
-                      "icon": Icons
-                          .local_grocery_store, // Default broad category icon
-                      "orderQty": 0,
-                    });
-                  });
-                  Navigator.pop(context);
-                }
-              },
-              child: const Text("Add"),
-            ),
-          ],
-        );
-      },
-    );
-  }
+  //   showDialog(
+  //     context: context,
+  //     builder: (context) {
+  //       return AlertDialog(
+  //         title: const Text("Add new item"),
+  //         content: Column(
+  //           mainAxisSize: MainAxisSize.min,
+  //           children: [
+  //             TextField(
+  //               decoration: const InputDecoration(labelText: "Item name"),
+  //               onChanged: (value) => name = value,
+  //             ),
+  //             TextField(
+  //               decoration: const InputDecoration(labelText: "Quantity"),
+  //               keyboardType: TextInputType.number,
+  //               onChanged: (value) => quantity = int.tryParse(value) ?? 1,
+  //             ),
+  //             TextField(
+  //               decoration: const InputDecoration(labelText: "Unit (metric)"),
+  //               onChanged: (value) => unit = value,
+  //             ),
+  //             TextField(
+  //               decoration: const InputDecoration(labelText: "Unit price"),
+  //               keyboardType: TextInputType.number,
+  //               onChanged: (value) => price = double.tryParse(value) ?? 0.0,
+  //             ),
+  //           ],
+  //         ),
+  //         actions: [
+  //           TextButton(
+  //             onPressed: () => Navigator.pop(context),
+  //             child: const Text("Cancel"),
+  //           ),
+  //           ElevatedButton(
+  //             onPressed: () {
+  //               if (name.isNotEmpty && unit.isNotEmpty) {
+  //                 setState(() {
+  //                   recipes.add({
+  //                     "name": name,
+  //                     "quantity": quantity,
+  //                     "unit": unit,
+  //                     "price": price,
+  //                     "icon": Icons
+  //                         .local_grocery_store, // Default broad category icon
+  //                     "orderQty": 0,
+  //                   });
+  //                 });
+  //                 Navigator.pop(context);
+  //               }
+  //             },
+  //             child: const Text("Add"),
+  //           ),
+  //         ],
+  //       );
+  //     },
+  //   );
+  // }
 
   void _editItem(int index) {
 // Find the actual index in the main recipes list
@@ -249,17 +258,6 @@ class _RecipesPageState extends State<RecipesPage> {
               });
             },
           ),
-          if (_hasChanges() ||
-              _saveButtonText ==
-                  "Save complete!") // Keep it visible if "Save Complete"
-            TextButton.icon(
-              onPressed: _hasChanges() ? _saveChanges : null,
-              icon: const Icon(Icons.save, color: Colors.white),
-              label: Text(
-                _saveButtonText,
-                style: const TextStyle(color: Colors.white),
-              ),
-            ),
         ],
       ),
 
@@ -312,7 +310,7 @@ class _RecipesPageState extends State<RecipesPage> {
                               Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  "${filteredRecipes[index]["quantity"]} ${filteredRecipes[index]["unit"] ?? ''}",
+                                  "${filteredRecipes[index]["ingredients"].join(', ')}",
                                   style: const TextStyle(fontSize: 14),
                                   textAlign: TextAlign.left,
                                 ),
@@ -335,10 +333,10 @@ class _RecipesPageState extends State<RecipesPage> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _showAddItemDialog(),
-        child: const Icon(Icons.add),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () => _showAddItemDialog(),
+      //   child: const Icon(Icons.add),
+      // ),
     );
   }
 }
