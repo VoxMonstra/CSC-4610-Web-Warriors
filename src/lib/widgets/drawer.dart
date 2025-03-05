@@ -39,6 +39,16 @@ class AppDrawer extends StatelessWidget {
                 Navigator.pushNamed(context, '/menu');
               },
             ),
+          
+          if (currPage.data != "Expenses")
+            ListTile(
+              leading: Icon(Icons.attach_money_outlined, color: Colors.black),
+              textColor: Colors.black,
+              title: Text('Expenses'),
+              onTap: () {
+                Navigator.pushNamed(context, '/expenses');
+              },
+            ),
 
           // Settings button
           if (currPage.data != "settings")

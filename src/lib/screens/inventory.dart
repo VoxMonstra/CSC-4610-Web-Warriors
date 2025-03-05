@@ -660,8 +660,7 @@ class _InventoryPageState extends State<InventoryPage> {
 
       // Sidebar
       drawer: AppDrawer(currPage: Text("inventory")),
-      backgroundColor: Color(0xFFE3CCB0), // Light brown background
-
+      backgroundColor: const Color(0xFFE3CCB0), // Light brown background
       // Displays all of the raw materials we currently have in stock, as well +- buttons for ordering raw materials
       body: Column(
         children: [
@@ -795,7 +794,7 @@ class _InventoryPageState extends State<InventoryPage> {
               itemCount: filteredInventory.length,
               itemBuilder: (context, index) {
                 return Card(
-                  color: Color(0xFFF5E6D3),
+                  color: Color(0xFFF5E6D3), // Very light brown
                   margin:
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                   child: Padding(
