@@ -9,13 +9,12 @@ class RecipesPage extends StatefulWidget {
 }
 
 class _RecipesPageState extends State<RecipesPage> {
-  String _saveButtonText = "Save changes";
   bool _isSearching = false;
   TextEditingController _searchController = TextEditingController();
   List<Map<String, dynamic>> filteredRecipes = [];
   final List<Map<String, dynamic>> recipes = [
     {
-      "name": "Muffin",
+      "name": "muffin",
       "ingredients": ["all-purpose flour", "eggs", "milk"],
       "quantity": [20, 2, 1],
       "unit": ["kg", "dozen", "litre"],
@@ -24,12 +23,263 @@ class _RecipesPageState extends State<RecipesPage> {
       "orderQty": 0
     }
   ];
+  final List<Map<String, dynamic>> ingredients = [
+    {
+      "name": "all-purpose flour",
+      "quantity": 20,
+      "unit": "kg",
+      "price": 1.50,
+      "icon": Icons.bakery_dining,
+      "orderQty": 0
+    }, // General grains/flour
+    {
+      "name": "bread flour",
+      "quantity": 20,
+      "unit": "kg",
+      "price": 1.70,
+      "icon": Icons.bakery_dining,
+      "orderQty": 0
+    },
+    {
+      "name": "whole-wheat flour",
+      "quantity": 20,
+      "unit": "kg",
+      "price": 1.80,
+      "icon": Icons.bakery_dining,
+      "orderQty": 0
+    },
+    {
+      "name": "cake flour",
+      "quantity": 20,
+      "unit": "kg",
+      "price": 1.60,
+      "icon": Icons.bakery_dining,
+      "orderQty": 0
+    },
+    {
+      "name": "rye flour",
+      "quantity": 20,
+      "unit": "kg",
+      "price": 2.00,
+      "icon": Icons.bakery_dining,
+      "orderQty": 0
+    },
+    {
+      "name": "cornmeal",
+      "quantity": 20,
+      "unit": "kg",
+      "price": 1.50,
+      "icon": Icons.bakery_dining,
+      "orderQty": 0
+    },
+    {
+      "name": "granulated sugar",
+      "quantity": 15,
+      "unit": "kg",
+      "price": 3.00,
+      "icon": Icons.bakery_dining,
+      "orderQty": 0
+    }, // Sweeteners
+    {
+      "name": "brown sugar",
+      "quantity": 20,
+      "unit": "kg",
+      "price": 3.20,
+      "icon": Icons.bakery_dining,
+      "orderQty": 0
+    },
+    {
+      "name": "powdered sugar",
+      "quantity": 20,
+      "unit": "kg",
+      "price": 3.40,
+      "icon": Icons.bakery_dining,
+      "orderQty": 0
+    },
+    {
+      "name": "salt",
+      "quantity": 20,
+      "unit": "kg",
+      "price": 0.60,
+      "icon": Icons.bakery_dining,
+      "orderQty": 0
+    }, // Seasonings & spices
+    {
+      "name": "yeast",
+      "quantity": 20,
+      "unit": "g",
+      "price": 1.00,
+      "icon": Icons.bakery_dining,
+      "orderQty": 0
+    }, // Baking ingredients
+    {
+      "name": "baking powder",
+      "quantity": 20,
+      "unit": "g",
+      "price": 0.90,
+      "icon": Icons.bakery_dining,
+      "orderQty": 0
+    },
+    {
+      "name": "baking soda",
+      "quantity": 20,
+      "unit": "g",
+      "price": 0.80,
+      "icon": Icons.bakery_dining,
+      "orderQty": 0
+    },
+    {
+      "name": "vegetable oil",
+      "quantity": 20,
+      "unit": "L",
+      "price": 2.50,
+      "icon": Icons.bakery_dining,
+      "orderQty": 0
+    },
+
+    {
+      "name": "oats",
+      "quantity": 20,
+      "unit": "kg",
+      "price": 2.20,
+      "icon": Icons.rice_bowl,
+      "orderQty": 0
+    }, // Grains & cereals
+    {
+      "name": "honey",
+      "quantity": 20,
+      "unit": "L",
+      "price": 5.00,
+      "icon": Icons.icecream,
+      "orderQty": 0
+    }, // Syrups & liquid sweeteners
+    {
+      "name": "maple syrup",
+      "quantity": 20,
+      "unit": "L",
+      "price": 6.50,
+      "icon": Icons.icecream,
+      "orderQty": 0
+    },
+    {
+      "name": "molasses",
+      "quantity": 20,
+      "unit": "L",
+      "price": 4.80,
+      "icon": Icons.icecream,
+      "orderQty": 0
+    },
+
+    {
+      "name": "butter",
+      "quantity": 10,
+      "unit": "kg",
+      "price": 4.50,
+      "icon": Icons.lunch_dining,
+      "orderQty": 0
+    }, // Dairy & fats
+    {
+      "name": "margarine",
+      "quantity": 20,
+      "unit": "kg",
+      "price": 3.80,
+      "icon": Icons.lunch_dining,
+      "orderQty": 0
+    },
+    {
+      "name": "shortening",
+      "quantity": 20,
+      "unit": "kg",
+      "price": 3.20,
+      "icon": Icons.lunch_dining,
+      "orderQty": 0
+    },
+
+    {
+      "name": "milk",
+      "quantity": 30,
+      "unit": "L",
+      "price": 1.20,
+      "icon": Icons.local_drink,
+      "orderQty": 0
+    }, // Dairy
+    {
+      "name": "butter milk",
+      "quantity": 20,
+      "unit": "L",
+      "price": 1.50,
+      "icon": Icons.local_drink,
+      "orderQty": 0
+    },
+    {
+      "name": "heavy cream",
+      "quantity": 20,
+      "unit": "L",
+      "price": 2.80,
+      "icon": Icons.local_drink,
+      "orderQty": 0
+    },
+
+    {
+      "name": "eggs",
+      "quantity": 20,
+      "unit": "dozen",
+      "price": 2.00,
+      "icon": Icons.egg,
+      "orderQty": 0
+    }, // Eggs
+    {
+      "name": "vanilla extract",
+      "quantity": 20,
+      "unit": "ml",
+      "price": 8.00,
+      "icon": Icons.liquor,
+      "orderQty": 0
+    },
+    {
+      "name": "cocoa powder",
+      "quantity": 20,
+      "unit": "kg",
+      "price": 5.50,
+      "icon": Icons.cookie,
+      "orderQty": 0
+    },
+    {
+      "name": "cinnamon",
+      "quantity": 20,
+      "unit": "kg",
+      "price": 6.00,
+      "icon": Icons.cookie,
+      "orderQty": 0
+    },
+    {
+      "name": "chocolate chips",
+      "quantity": 20,
+      "unit": "kg",
+      "price": 7.50,
+      "icon": Icons.cookie,
+      "orderQty": 0
+    },
+    {
+      "name": "almonds",
+      "quantity": 20,
+      "unit": "kg",
+      "price": 10.00,
+      "icon": Icons.cookie,
+      "orderQty": 0
+    }, // Nuts & seeds
+  ];
+
+  List<String> ingredientNames = [];
 
   @override
   void initState() {
     super.initState();
     filteredRecipes =
         List.from(recipes); // Ensure full list is displayed at startup
+    for (var item in ingredients) {
+      ingredientNames.add(item["name"]);
+    }
   }
 
   void _filterRecipes(String query) {
@@ -44,8 +294,6 @@ class _RecipesPageState extends State<RecipesPage> {
       }
     });
   }
-
-  void _saveChanges() {}
 
   void _viewItemDetails(int index) {
     showDialog(
@@ -165,12 +413,7 @@ class _RecipesPageState extends State<RecipesPage> {
 
     if (recipesIndex == -1) return; // Ensure item exists in main inventory
 
-    TextEditingController quantityController = TextEditingController(
-        text: recipes[recipesIndex]["quantity"].toString());
-    TextEditingController unitController =
-        TextEditingController(text: recipes[recipesIndex]["unit"] ?? '');
-    TextEditingController priceController = TextEditingController(
-        text: recipes[recipesIndex]["price"]?.toString() ?? '');
+    String? selectedIngredient = ingredientNames.first;
 
     showDialog(
       context: context,
@@ -180,20 +423,30 @@ class _RecipesPageState extends State<RecipesPage> {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              TextField(
-                controller: quantityController,
-                decoration: const InputDecoration(labelText: "Quantity"),
-                keyboardType: TextInputType.number,
-              ),
-              TextField(
-                controller: unitController,
-                decoration: const InputDecoration(labelText: "Unit (metric)"),
-              ),
-              TextField(
-                controller: priceController,
-                decoration: const InputDecoration(labelText: "Price per Unit"),
-                keyboardType: TextInputType.number,
-              ),
+              const SizedBox(height: 10), // Add spacing
+              for (int i = 0; i < recipes[index]["ingredients"].length; i++)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    DropdownButton<String>(
+                      value: recipes[index]["ingredients"]
+                          [i], // Bind the selected ingredient
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          selectedIngredient =
+                              newValue; // Update selected ingredient
+                        });
+                      },
+                      items: ingredientNames
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value), // Display ingredient names
+                        );
+                      }).toList(),
+                    ),
+                  ],
+                ),
             ],
           ),
           actions: [
@@ -203,19 +456,6 @@ class _RecipesPageState extends State<RecipesPage> {
             ),
             ElevatedButton(
               onPressed: () {
-                setState(() {
-                  // Update the actual item in inventory
-                  recipes[recipesIndex]["quantity"] =
-                      int.tryParse(quantityController.text) ??
-                          recipes[recipesIndex]["quantity"];
-                  recipes[recipesIndex]["unit"] = unitController.text.isNotEmpty
-                      ? unitController.text
-                      : recipes[recipesIndex]["unit"];
-                  recipes[recipesIndex]["price"] =
-                      double.tryParse(priceController.text) ??
-                          recipes[recipesIndex]["price"];
-                });
-
                 Navigator.pop(context);
               },
               child: const Text("Save"),
@@ -326,8 +566,8 @@ class _RecipesPageState extends State<RecipesPage> {
                         ElevatedButton(
                           onPressed: () => _viewItemDetails(index),
                           style: ElevatedButton.styleFrom(
-                          backgroundColor:  Color(0xFFE3CCB0),
-                          foregroundColor: Colors.black,
+                            backgroundColor: Color(0xFFE3CCB0),
+                            foregroundColor: Colors.black,
                           ),
                           child: const Text("View"),
                         ),
