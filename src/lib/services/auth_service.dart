@@ -4,6 +4,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:jwt_decoder/jwt_decoder.dart';
+
 class AuthService {
   static const String apiUrl = 'https://simplybakery-dev.duckdns.org/api';
   final FlutterSecureStorage _storage = FlutterSecureStorage();
@@ -15,9 +17,14 @@ class AuthService {
   Future<void> storeToken(String token) async {
     await _storage.write(key: 'access_token', value: token);
   }
+
+  Future<String?> getUserRole() async {
+    return await _storage.read(key: 'user_role');
+  }
   //(Clears Token)
   Future<void> logout() async {
     await _storage.delete(key: 'access_token');
+    await _storage.delete(key: 'user_role');
     print('Token deleted');
   }
 
@@ -77,8 +84,14 @@ class AuthService {
         final data = jsonDecode(response.body);
         final token = data['token']; //response should contain a token
         await storeToken(token); //store
-        print('token stored: $token');
+        Map<String, dynamic> decodedToken = JwtDecoder.decode(token);
+        String? role = decodedToken["role"];
+
+        await _storage.write(key: 'user_role', value: role);
+
+        print('token stored: $token, Role stored: $role');
         return token;
+
       } else if (response.statusCode == 403) {
         await logout();
         throw Exception("Session Expired. Please log in again.");

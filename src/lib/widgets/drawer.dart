@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import '../services/auth_service.dart';
 
 class AppDrawer extends StatelessWidget {
   final Text currPage;
-  const AppDrawer({super.key, required this.currPage});
+  AppDrawer({super.key, required this.currPage});
+  final AuthService _authService = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -48,15 +50,27 @@ class AppDrawer extends StatelessWidget {
               },
             ),
 
-            if (currPage.data != "inventory")
-              ListTile(
-                leading: Icon(Icons.inventory),
-                title: Text('Inventory'),
-                onTap: () {
-                  Navigator.pushNamed(context, '/inventory');
-                },
-              ),
+          FutureBuilder<String?>(
+            future: _authService.getUserRole(), 
+            builder: (context, snapshot) {
+              if(!snapshot.hasData) {
+                return SizedBox.shrink();
+              }
 
+              String? role = snapshot.data;
+
+              if ((role == 'admin' || role == 'employee') && currPage.data != "inventory") {
+                return ListTile(
+                  leading: Icon(Icons.inventory),
+                  title: Text('Inventory'),
+                  onTap: () {
+                    Navigator.pushNamed(context, '/inventory');
+                  },
+                );
+              }
+              return SizedBox.shrink();
+              },
+            ),
             if (currPage.data != "about")
               ListTile(
                 leading: Icon(Icons.info),
