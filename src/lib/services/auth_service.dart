@@ -33,7 +33,34 @@ class AuthService {
     String? token = await _storage.read(key: 'access_token');
     return token != null;
   }
-  
+  Future<List<Map<String, dynamic>>?> fetchUsers() async {
+    try {
+      String? token = await getToken();
+      if (token == null) {
+        throw Exception("No token found. Please log in.");
+      }
+
+      final response = await http.get(
+        Uri.parse('$apiUrl/users'), // Backend API route
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token", // Send auth token
+        },
+      );
+
+      if (response.statusCode == 200) {
+        List<dynamic> users = jsonDecode(response.body);
+        return List<Map<String, dynamic>>.from(users);
+      } else {
+        print("Failed to fetch users: ${response.body}");
+        return null;
+      }
+    } catch (e) {
+      print("Error fetching users: $e");
+      return null;
+    }
+  }
+
   Future<http.Response> authenticatedRequest(
     String endpoint, String method, {Map<String, dynamic>? body}) async {
       String? token = await getToken();
@@ -55,7 +82,7 @@ class AuthService {
         response = await http.post(url, headers: headers, body: jsonEncode(body));
       }
 
-      if (response.header.containsKey("authorization")) {
+      if (response.headers.containsKey("authorization")) {
         String? newToken = response.headers["authorization"];
         if (newToken != null && newToken.startsWith("Bearer ")) {
           await storeToken(newToken.split(" ")[1]);
@@ -142,8 +169,9 @@ class AuthService {
     return false;
     }
   } 
+}
 
-  Future<Map<String, dynamic>?> fetchUserData() async {
+  /*Future<Map<String, dynamic>?> fetchUserData() async {
     try {
       String? token = await getToken();
       if (token == null) return null;
@@ -166,4 +194,4 @@ class AuthService {
       return {};
     }
   }
-}
+} */

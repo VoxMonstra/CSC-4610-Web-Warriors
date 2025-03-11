@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:src/screens/user_list.dart';
 import 'package:src/services/auth_service.dart';
 import './screens/settings.dart';
 import './screens/login.dart';
@@ -81,6 +82,7 @@ class _MyAppState extends State<MyApp> {
         '/about': (context) => AboutPage(),
         '/menu': (context) => BakeryShop(),
         '/expenses': (context) => ExpensesPage(),
+        '/users': (context) => UserListScreen(),
       },
     );
   }

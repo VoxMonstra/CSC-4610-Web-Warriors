@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:src/screens/user_list.dart';
 import 'package:src/services/auth_service.dart';
 import 'account_settings.dart';
 import 'preferences.dart';
@@ -122,6 +123,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ListTile(
               title: const Text('View User Info', style: TextStyle(color: Colors.black)),
               leading: const Icon(Icons.person, color: Colors.black),
+              onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const UserListScreen()));
+              },
             ),
 
             ListTile(
