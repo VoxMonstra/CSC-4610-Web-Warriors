@@ -119,6 +119,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => const PreferencesScreen()));
               },
             ),
+            ListTile(
+              title: const Text('View User Info', style: TextStyle(color: Colors.black)),
+              leading: const Icon(Icons.person, color: Colors.black),
+            ),
+
+            ListTile(
+              title: const Text('Update Permissions', style: TextStyle(color: Colors.black)),
+              leading: const Icon(Icons.admin_panel_settings, color: Colors.black),
+            ),
 
             ListTile(
               title: const Text('Logout', style: TextStyle(color: Colors.black)),
