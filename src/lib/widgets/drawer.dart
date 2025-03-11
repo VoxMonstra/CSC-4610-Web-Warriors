@@ -24,31 +24,45 @@ class AppDrawer extends StatelessWidget {
           // Home button
           if (currPage.data != "home")
             ListTile(
-              leading: Icon(Icons.home),
+              leading: Icon(Icons.home, color: Colors.black),
+              textColor: Colors.black,
               title: Text('Home'),
               onTap: () {
                 Navigator.pushNamed(context, '/home');
               },
             ),
 
-            if (currPage.data != "menu")
+          if (currPage.data != "menu")
             ListTile(
-              leading: Icon(Icons.receipt),
+              leading: Icon(Icons.receipt, color: Colors.black),
+              textColor: Colors.black,
               title: Text('Order'),
               onTap: () {
                 Navigator.pushNamed(context, '/menu');
+              },
+            ),
+          
+          if (currPage.data != "Expenses")
+            ListTile(
+              leading: Icon(Icons.attach_money_outlined, color: Colors.black),
+              textColor: Colors.black,
+              title: Text('Expenses'),
+              onTap: () {
+                Navigator.pushNamed(context, '/expenses');
               },
             ),
 
           // Settings button
           if (currPage.data != "settings")
             ListTile(
-              leading: Icon(Icons.settings),
+              leading: Icon(Icons.settings, color: Colors.black),
+              textColor: Colors.black,
               title: Text('Settings'),
               onTap: () {
                 Navigator.pushNamed(context, '/settings');
               },
             ),
+
 
           FutureBuilder<String?>(
             future: _authService.getUserRole(), 
@@ -61,7 +75,8 @@ class AppDrawer extends StatelessWidget {
 
               if ((role == 'admin' || role == 'employee') && currPage.data != "inventory") {
                 return ListTile(
-                  leading: Icon(Icons.inventory),
+                  leading: Icon(Icons.inventory, color: Colors.black,),
+                  textColor: Colors.black,
                   title: Text('Inventory'),
                   onTap: () {
                     Navigator.pushNamed(context, '/inventory');
@@ -73,17 +88,18 @@ class AppDrawer extends StatelessWidget {
             ),
             if (currPage.data != "about")
               ListTile(
-                leading: Icon(Icons.info),
+                leading: Icon(Icons.info, color: Colors.black,),
+                textColor: Colors.black,
                 title: Text('About'),
                 onTap: () {
                   Navigator.pushNamed(context, '/about');
                 },
               ),
-
           // Login button
           if (currPage.data != "login")
             ListTile(
-              leading: Icon(Icons.logout),
+              leading: Icon(Icons.logout, color: Colors.black),
+              textColor: Colors.black,
               title: Text('Login'),
               onTap: () {
                 Navigator.pushNamed(context, '/login');

@@ -120,7 +120,7 @@ class BakeryShop extends StatelessWidget {
                           ),
                           Text(
                             '\$${item.price.toStringAsFixed(2)}',
-                            style: TextStyle(fontSize: 14, color: Colors.grey),
+                            style: TextStyle(fontSize: 14, color: const Color.fromARGB(255, 0, 0, 0)),
                           ),
                           Align(
                             alignment: Alignment.centerRight,

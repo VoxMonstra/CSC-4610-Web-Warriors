@@ -31,7 +31,7 @@ class HomePage extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    'Welcome [name]',
+                    'Welcome User',
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                           color: Colors.black,
                         ),

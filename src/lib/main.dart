@@ -6,8 +6,10 @@ import './screens/settings.dart';
 import './screens/login.dart';
 import './screens/about.dart';
 import './screens/inventory.dart' as inv; // Alias to avoid conflicts
+import './screens/recipes.dart' as rec; // Alias to avoid conflicts
 import './screens/home.dart';
 import './screens/menu.dart';
+import './screens/expenses.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,7 +31,8 @@ Future<ThemeMode> _loadTheme() async {
 class MyApp extends StatefulWidget {
   final ThemeMode initialThemeMode;
   final bool loggedIn;
-  const MyApp({super.key, required this.initialThemeMode, required this.loggedIn});
+  const MyApp(
+      {super.key, required this.initialThemeMode, required this.loggedIn});
 
   @override
   _MyAppState createState() => _MyAppState();
@@ -74,8 +77,10 @@ class _MyAppState extends State<MyApp> {
         '/settings': (context) => SettingsScreen(onThemeChanged: _updateTheme),
         '/inventory': (context) => inv
             .InventoryPage(), // Use alias since it literally won't work without it
+        '/recipes': (context) => rec.RecipesPage(),
         '/about': (context) => AboutPage(),
         '/menu': (context) => BakeryShop(),
+        '/expenses': (context) => ExpensesPage(),
       },
     );
   }

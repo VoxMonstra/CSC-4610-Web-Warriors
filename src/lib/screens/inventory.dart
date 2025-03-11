@@ -18,7 +18,7 @@ class _InventoryPageState extends State<InventoryPage> {
   // This needs to be in our database, along with the ability for an admin to add, remove, and edit items
   final List<Map<String, dynamic>> ingredients = [
     {
-      "name": "All-purpose Flour",
+      "name": "all-purpose flour",
       "quantity": 20,
       "unit": "kg",
       "price": 1.50,
@@ -26,7 +26,7 @@ class _InventoryPageState extends State<InventoryPage> {
       "orderQty": 0
     }, // General grains/flour
     {
-      "name": "Bread Flour",
+      "name": "bread flour",
       "quantity": 20,
       "unit": "kg",
       "price": 1.70,
@@ -34,7 +34,7 @@ class _InventoryPageState extends State<InventoryPage> {
       "orderQty": 0
     },
     {
-      "name": "Whole-Wheat Flour",
+      "name": "whole-wheat flour",
       "quantity": 20,
       "unit": "kg",
       "price": 1.80,
@@ -42,7 +42,7 @@ class _InventoryPageState extends State<InventoryPage> {
       "orderQty": 0
     },
     {
-      "name": "Cake Flour",
+      "name": "cake flour",
       "quantity": 20,
       "unit": "kg",
       "price": 1.60,
@@ -50,7 +50,7 @@ class _InventoryPageState extends State<InventoryPage> {
       "orderQty": 0
     },
     {
-      "name": "Rye Flour",
+      "name": "rye flour",
       "quantity": 20,
       "unit": "kg",
       "price": 2.00,
@@ -58,7 +58,7 @@ class _InventoryPageState extends State<InventoryPage> {
       "orderQty": 0
     },
     {
-      "name": "Cornmeal",
+      "name": "cornmeal",
       "quantity": 20,
       "unit": "kg",
       "price": 1.50,
@@ -66,7 +66,7 @@ class _InventoryPageState extends State<InventoryPage> {
       "orderQty": 0
     },
     {
-      "name": "Granulated Sugar",
+      "name": "granulated sugar",
       "quantity": 15,
       "unit": "kg",
       "price": 3.00,
@@ -74,7 +74,7 @@ class _InventoryPageState extends State<InventoryPage> {
       "orderQty": 0
     }, // Sweeteners
     {
-      "name": "Brown Sugar",
+      "name": "brown sugar",
       "quantity": 20,
       "unit": "kg",
       "price": 3.20,
@@ -82,7 +82,7 @@ class _InventoryPageState extends State<InventoryPage> {
       "orderQty": 0
     },
     {
-      "name": "Powdered Sugar",
+      "name": "powdered sugar",
       "quantity": 20,
       "unit": "kg",
       "price": 3.40,
@@ -90,7 +90,7 @@ class _InventoryPageState extends State<InventoryPage> {
       "orderQty": 0
     },
     {
-      "name": "Salt",
+      "name": "salt",
       "quantity": 20,
       "unit": "kg",
       "price": 0.60,
@@ -98,7 +98,7 @@ class _InventoryPageState extends State<InventoryPage> {
       "orderQty": 0
     }, // Seasonings & spices
     {
-      "name": "Yeast",
+      "name": "yeast",
       "quantity": 20,
       "unit": "g",
       "price": 1.00,
@@ -106,7 +106,7 @@ class _InventoryPageState extends State<InventoryPage> {
       "orderQty": 0
     }, // Baking ingredients
     {
-      "name": "Baking Powder",
+      "name": "baking powder",
       "quantity": 20,
       "unit": "g",
       "price": 0.90,
@@ -114,7 +114,7 @@ class _InventoryPageState extends State<InventoryPage> {
       "orderQty": 0
     },
     {
-      "name": "Baking Soda",
+      "name": "baking soda",
       "quantity": 20,
       "unit": "g",
       "price": 0.80,
@@ -122,7 +122,7 @@ class _InventoryPageState extends State<InventoryPage> {
       "orderQty": 0
     },
     {
-      "name": "Vegetable Oil",
+      "name": "vegetable oil",
       "quantity": 20,
       "unit": "L",
       "price": 2.50,
@@ -131,7 +131,7 @@ class _InventoryPageState extends State<InventoryPage> {
     },
 
     {
-      "name": "Oats",
+      "name": "oats",
       "quantity": 20,
       "unit": "kg",
       "price": 2.20,
@@ -139,7 +139,7 @@ class _InventoryPageState extends State<InventoryPage> {
       "orderQty": 0
     }, // Grains & cereals
     {
-      "name": "Honey",
+      "name": "honey",
       "quantity": 20,
       "unit": "L",
       "price": 5.00,
@@ -147,7 +147,7 @@ class _InventoryPageState extends State<InventoryPage> {
       "orderQty": 0
     }, // Syrups & liquid sweeteners
     {
-      "name": "Maple Syrup",
+      "name": "maple syrup",
       "quantity": 20,
       "unit": "L",
       "price": 6.50,
@@ -155,7 +155,7 @@ class _InventoryPageState extends State<InventoryPage> {
       "orderQty": 0
     },
     {
-      "name": "Molasses",
+      "name": "molasses",
       "quantity": 20,
       "unit": "L",
       "price": 4.80,
@@ -164,7 +164,7 @@ class _InventoryPageState extends State<InventoryPage> {
     },
 
     {
-      "name": "Butter",
+      "name": "butter",
       "quantity": 10,
       "unit": "kg",
       "price": 4.50,
@@ -172,7 +172,7 @@ class _InventoryPageState extends State<InventoryPage> {
       "orderQty": 0
     }, // Dairy & fats
     {
-      "name": "Margarine",
+      "name": "margarine",
       "quantity": 20,
       "unit": "kg",
       "price": 3.80,
@@ -180,7 +180,7 @@ class _InventoryPageState extends State<InventoryPage> {
       "orderQty": 0
     },
     {
-      "name": "Shortening",
+      "name": "shortening",
       "quantity": 20,
       "unit": "kg",
       "price": 3.20,
@@ -189,7 +189,7 @@ class _InventoryPageState extends State<InventoryPage> {
     },
 
     {
-      "name": "Milk",
+      "name": "milk",
       "quantity": 30,
       "unit": "L",
       "price": 1.20,
@@ -197,7 +197,7 @@ class _InventoryPageState extends State<InventoryPage> {
       "orderQty": 0
     }, // Dairy
     {
-      "name": "Butter Milk",
+      "name": "butter milk",
       "quantity": 20,
       "unit": "L",
       "price": 1.50,
@@ -205,7 +205,7 @@ class _InventoryPageState extends State<InventoryPage> {
       "orderQty": 0
     },
     {
-      "name": "Heavy Cream",
+      "name": "heavy cream",
       "quantity": 20,
       "unit": "L",
       "price": 2.80,
@@ -214,7 +214,7 @@ class _InventoryPageState extends State<InventoryPage> {
     },
 
     {
-      "name": "Eggs",
+      "name": "eggs",
       "quantity": 20,
       "unit": "dozen",
       "price": 2.00,
@@ -222,7 +222,7 @@ class _InventoryPageState extends State<InventoryPage> {
       "orderQty": 0
     }, // Eggs
     {
-      "name": "Vanilla Extract",
+      "name": "vanilla extract",
       "quantity": 20,
       "unit": "ml",
       "price": 8.00,
@@ -230,7 +230,7 @@ class _InventoryPageState extends State<InventoryPage> {
       "orderQty": 0
     },
     {
-      "name": "Cocoa Powder",
+      "name": "cocoa powder",
       "quantity": 20,
       "unit": "kg",
       "price": 5.50,
@@ -238,7 +238,7 @@ class _InventoryPageState extends State<InventoryPage> {
       "orderQty": 0
     },
     {
-      "name": "Cinnamon",
+      "name": "cinnamon",
       "quantity": 20,
       "unit": "kg",
       "price": 6.00,
@@ -246,7 +246,7 @@ class _InventoryPageState extends State<InventoryPage> {
       "orderQty": 0
     },
     {
-      "name": "Chocolate Chips",
+      "name": "chocolate chips",
       "quantity": 20,
       "unit": "kg",
       "price": 7.50,
@@ -254,7 +254,7 @@ class _InventoryPageState extends State<InventoryPage> {
       "orderQty": 0
     },
     {
-      "name": "Almonds",
+      "name": "almonds",
       "quantity": 20,
       "unit": "kg",
       "price": 10.00,
@@ -265,7 +265,7 @@ class _InventoryPageState extends State<InventoryPage> {
 
   List<Map<String, dynamic>> products = [
     {
-      "name": "Baguette",
+      "name": "baguette",
       "quantity": 10,
       "unit": "pcs",
       "price": 2.50,
@@ -273,7 +273,7 @@ class _InventoryPageState extends State<InventoryPage> {
       "orderQty": 0
     },
     {
-      "name": "Croissant",
+      "name": "croissant",
       "quantity": 8,
       "unit": "pcs",
       "price": 3.00,
@@ -287,7 +287,7 @@ class _InventoryPageState extends State<InventoryPage> {
       "time": "2024-02-12 12:50:32",
       "items": [
         {
-          "name": "Eggs",
+          "name": "eggs",
           "quantity": 20,
           "unit": "dozen",
           "price": 2.00,
@@ -591,8 +591,29 @@ class _InventoryPageState extends State<InventoryPage> {
     );
   }
 
+  double _getTabPosition(double screenwidth) {
+    int tabCount = 4; // Number of tabs
+    double tabWidth = screenwidth / tabCount;
+    double firstTabPosition = 0;
+
+    switch (currInventory) {
+      case "ingredients":
+        //return 0;
+        return ((screenwidth - 407) / 2);
+      case "products":
+        return ((screenwidth - 407) / 2) + 97;
+      case "damages":
+        return ((screenwidth - 407) / 2) + 194;
+      case "log":
+        return ((screenwidth - 407) / 2) + 291;
+      default:
+        return 0;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       // Title
       appBar: AppBar(
@@ -639,7 +660,7 @@ class _InventoryPageState extends State<InventoryPage> {
 
       // Sidebar
       drawer: AppDrawer(currPage: Text("inventory")),
-
+      backgroundColor: const Color(0xFFE3CCB0), // Light brown background
       // Displays all of the raw materials we currently have in stock, as well +- buttons for ordering raw materials
       body: Column(
         children: [
@@ -648,70 +669,95 @@ class _InventoryPageState extends State<InventoryPage> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                // Toggle Buttons
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    TextButton(
-                      onPressed: () => _switchInventory("ingredients"),
-                      child: Text(
-                        "Ingredients",
-                        style: TextStyle(
-                          fontWeight: currInventory == "ingredients"
-                              ? FontWeight.bold
-                              : FontWeight.normal,
-                          color: currInventory == "ingredients"
-                              ? Colors.black
-                              : Colors.grey,
+                // Toggle Buttons Card
+                Card(
+                  color: Color(0xFFF5E6D3),
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  child: Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: Stack(
+                      children: [
+                        AnimatedPositioned(
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                          left: _getTabPosition(screenWidth),
+                          child: Container(
+                            width: 80,
+                            height: 5,
+                            decoration: BoxDecoration(
+                              color: Color.fromARGB(255, 54, 129, 7),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                    const Text(" | "),
-                    TextButton(
-                      onPressed: () => _switchInventory("products"),
-                      child: Text(
-                        "Products",
-                        style: TextStyle(
-                          fontWeight: currInventory == "products"
-                              ? FontWeight.bold
-                              : FontWeight.normal,
-                          color: currInventory == "products"
-                              ? Colors.black
-                              : Colors.grey,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TextButton(
+                              onPressed: () => _switchInventory("ingredients"),
+                              child: Text(
+                                "Ingredients",
+                                style: TextStyle(
+                                  fontWeight: currInventory == "ingredients"
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
+                                  color: currInventory == "ingredients"
+                                      ? Colors.black
+                                      : Colors.grey,
+                                ),
+                              ),
+                            ),
+                            const Text(" | "),
+                            TextButton(
+                              onPressed: () => _switchInventory("products"),
+                              child: Text(
+                                "Products",
+                                style: TextStyle(
+                                  fontWeight: currInventory == "products"
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
+                                  color: currInventory == "products"
+                                      ? Colors.black
+                                      : Colors.grey,
+                                ),
+                              ),
+                            ),
+                            const Text(" | "),
+                            TextButton(
+                              onPressed: () => _switchInventory("damages"),
+                              child: Text(
+                                "Damages",
+                                style: TextStyle(
+                                  fontWeight: currInventory == "damages"
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
+                                  color: currInventory == "damages"
+                                      ? Colors.black
+                                      : Colors.grey,
+                                ),
+                              ),
+                            ),
+                            const Text(" | "),
+                            TextButton(
+                              onPressed: () => _switchInventory("log"),
+                              child: Text(
+                                "Log",
+                                style: TextStyle(
+                                  fontWeight: currInventory == "log"
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
+                                  color: currInventory == "log"
+                                      ? Colors.black
+                                      : Colors.grey,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
+                      ],
                     ),
-                    const Text(" | "),
-                    TextButton(
-                      onPressed: () => _switchInventory("damages"),
-                      child: Text(
-                        "Damages",
-                        style: TextStyle(
-                          fontWeight: currInventory == "damages"
-                              ? FontWeight.bold
-                              : FontWeight.normal,
-                          color: currInventory == "damages"
-                              ? Colors.black
-                              : Colors.grey,
-                        ),
-                      ),
-                    ),
-                    const Text(" | "),
-                    TextButton(
-                      onPressed: () => _switchInventory("log"),
-                      child: Text(
-                        "Log",
-                        style: TextStyle(
-                          fontWeight: currInventory == "log"
-                              ? FontWeight.bold
-                              : FontWeight.normal,
-                          color: currInventory == "log"
-                              ? Colors.black
-                              : Colors.grey,
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
 
                 // Damage reason dropdown (only for "Damages" inventory)
@@ -748,6 +794,7 @@ class _InventoryPageState extends State<InventoryPage> {
               itemCount: filteredInventory.length,
               itemBuilder: (context, index) {
                 return Card(
+                  color: Color(0xFFF5E6D3), // Very light brown
                   margin:
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                   child: Padding(
