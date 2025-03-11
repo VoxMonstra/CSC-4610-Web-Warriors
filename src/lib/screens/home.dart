@@ -53,7 +53,10 @@ class HomePage extends StatelessWidget {
                       children: [
                         Text(
                           'Order',
-                          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall
+                              ?.copyWith(
                                 color: Colors.black,
                               ),
                         ),
@@ -62,10 +65,11 @@ class HomePage extends StatelessWidget {
                           scrollDirection: Axis.horizontal,
                           child: Row(
                             children: List.generate(
-                                20,
+                                4,
                                 (index) => Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                    child: _buildOrderBox(context))),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0),
+                                    child: _buildOrderBox(context, index))),
                           ),
                         ),
                       ],
@@ -76,14 +80,17 @@ class HomePage extends StatelessWidget {
                     padding: EdgeInsets.all(16),
                     margin: EdgeInsets.symmetric(horizontal: 20),
                     decoration: BoxDecoration(
-                      color: Color(0xFFF5E6D3), // Very light brown
+                      color: Color(0xFFF5E6D3),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Column(
                       children: [
                         Text(
-                          'Products',
-                          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                          'Order History',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall
+                              ?.copyWith(
                                 color: Colors.black,
                               ),
                         ),
@@ -92,10 +99,11 @@ class HomePage extends StatelessWidget {
                           scrollDirection: Axis.horizontal,
                           child: Row(
                             children: List.generate(
-                                20,
+                                4,
                                 (index) => Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                    child: _buildOrderBox(context))),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0),
+                                    child: _buildOrderBox(context, index + 4))),
                           ),
                         ),
                       ],
@@ -113,7 +121,17 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildOrderBox(BuildContext context) {
+  Widget _buildOrderBox(BuildContext context, int index) {
+    List<IconData> icons = [
+      Icons.bakery_dining,
+      Icons.fastfood,
+      Icons.local_pizza,
+      Icons.local_cafe,
+      Icons.history,
+      Icons.receipt,
+      Icons.assignment,
+      Icons.done_all
+    ];
     return GestureDetector(
       onTap: () {},
       child: Container(
@@ -124,7 +142,7 @@ class HomePage extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
         ),
         child: Center(
-          child: Icon(Icons.image, size: 50, color: Colors.grey),
+          child: Icon(icons[index], size: 50, color: Colors.grey),
         ),
       ),
     );
