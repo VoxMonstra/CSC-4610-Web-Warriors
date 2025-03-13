@@ -445,6 +445,27 @@ class _RecipesPageState extends State<RecipesPage> {
                         );
                       }).toList(),
                     ),
+                    const SizedBox(
+                        width:
+                            10), // Add spacing between DropdownButton and quantity input
+                    // Quantity input field (using TextField for simplicity)
+                    SizedBox(
+                      width: 60,
+                      child: TextField(
+                        keyboardType: TextInputType.number,
+                        onChanged: (String newValue) {
+                          setState(() {
+                            // Update the quantity here (e.g., store it in a map or list)
+                            recipes[index]["ingredientsQuantity"][i] =
+                                int.tryParse(newValue) ?? 0;
+                          });
+                        },
+                        decoration: InputDecoration(
+                          hintText: 'Qty',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
             ],
